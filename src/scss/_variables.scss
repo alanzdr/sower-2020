@@ -14,8 +14,9 @@ $link-color: $primary-color !default;
 //
 $title-color: $primary-color !default;
 $text-color: #12161F !default;
+$background-color: #FFFCEE !default;
 
-// 3. KEYFRAME
+// 3. KEYFRAME TEMPLATE
 @mixin keyframes($name) {
   @-webkit-keyframes #{$name} {
     @content;
