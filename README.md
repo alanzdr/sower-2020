@@ -15,7 +15,7 @@ Base HTML Workspace It is one as the name says, a base for creating static HTML 
 
 ## 🤔 Why
 
-There are several frameworks and tools with the same purpose, but here the objective was to be as open as possible, so that it can be molded and free from any requirement, directly using the tools for its purpose ().
+There are several frameworks and tools with the same purpose, but here the objective was to be as open as possible, so that it can be molded and free from any requirement, directly using the tools for its purpose.
 
 The main idea of ​​the project is to separate all the development part from the part read by HTML, thus being able to change how the development is done, without changing how it should be in the end.
 
