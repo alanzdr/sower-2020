@@ -5,6 +5,11 @@
   "repository": "https://github.com/alanzdr/base_html_workspace.git",
   "author": "alanzdr <alandersonzelindrodr@gmail.com>",
   "license": "MIT",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
   "scripts": {
     "sass": "sass --watch src/scss:assets/css --style compressed",
     "script": "babel --watch src/js --out-dir assets/js"
@@ -15,17 +20,5 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-flow": "^7.10.1",
     "babel-preset-minify": "^0.5.1"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
