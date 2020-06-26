@@ -2,13 +2,27 @@
 @import 'variables';
 @import 'default';
 
-body {
+
+section {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-h1 {
-  font-size: 80px;
+#section02 {
+  background: #F5D253;
+}
+#section03 {
+  background: #99F8CB;
+}
+#section03 {
+  background: #FD5B78;
+}
+#section04 {
+  background: #6CCDFC;
+}
+#section04 {
+  background: #FF98AA;
 }

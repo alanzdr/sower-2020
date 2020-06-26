@@ -8,6 +8,8 @@
       }
     ],
     "@babel/preset-flow",
-    "minify"
+    ["minify", {
+      "builtIns": false
+    }]
   ]
 }
