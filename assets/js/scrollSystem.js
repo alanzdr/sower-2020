@@ -8,9 +8,25 @@ function animationFrame() {
   return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || timeoutFuncion;
 }
 
-function animationControll() {
+function animationControll(target, margin) {
+  var items = document.querySelectorAll('.animated');
+
   var animate = function animate() {
-    console.log('animate');
+    var position = target.scrollTop;
+    var animationPoint = position + window.innerHeight / 2;
+    items.forEach(function (item) {
+      var top = item.offsetTop;
+      var distance = top - (animationPoint + margin);
+      item.dataset.distance = distance;
+
+      if (top <= animationPoint + margin) {
+        item.dataset.active = true;
+        item.classList.add('active');
+      } else {
+        item.dataset.active = false;
+        item.classList.remove('active');
+      }
+    });
   };
 
   return {
@@ -18,11 +34,10 @@ function animationControll() {
   };
 }
 
-function smoothScroll(speed, smooth) {
+function smoothScroll(target, speed, smooth) {
   var moving = false;
   var reseted = false;
   var requestFrame = animationFrame();
-  var target = document.scrollingElement || document.documentElement || document.body.parentNode || document.body;
   var frame = target === document.body && document.documentElement ? document.documentElement : target;
   var position = target.scrollTop;
 
@@ -79,8 +94,10 @@ function smoothScroll(speed, smooth) {
 function systemControl() {
   var scrollSpeed = 140;
   var scrollSmoth = 16;
-  var smooth = smoothScroll(scrollSpeed, scrollSmoth);
-  var animation = animationControll();
+  var animationMargin = 40;
+  var target = document.scrollingElement || document.documentElement || document.body.parentNode || document.body;
+  var smooth = smoothScroll(target, scrollSpeed, scrollSmoth);
+  var animation = animationControll(target, animationMargin);
 
   var move = function move(event) {
     event.preventDefault();
@@ -143,6 +160,7 @@ function systemControl() {
     window.addEventListener('mousedown', commum);
     window.addEventListener("keydown", onKeyDown);
     navigationScroll();
+    animation.animate();
   };
 
   return {

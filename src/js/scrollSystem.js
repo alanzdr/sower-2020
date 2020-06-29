@@ -12,25 +12,36 @@ function animationFrame () {
   );
 }
 
-function animationControll () {
+function animationControll (target, margin) {
+  const items = document.querySelectorAll('.animated');
+
   const animate = () => {
-    console.log('animate')
+    const position = target.scrollTop;
+    const animationPoint = position + (window.innerHeight / 2); 
+    items.forEach(item => {
+      const top = item.offsetTop;
+      const distance = top - (animationPoint + margin);
+      item.dataset.distance = distance;
+      if (top <= (animationPoint + margin)) {
+        item.dataset.active = true;
+        item.classList.add('active');
+      } else {
+        item.dataset.active = false;
+        item.classList.remove('active');
+      }
+    })
   }
+
   return {
     animate
   }
 }
 
-function smoothScroll (speed, smooth) {
+function smoothScroll (target, speed, smooth) {
   let moving = false;
   let reseted = false;
   const requestFrame = animationFrame();
-  
-  const target = (document.scrollingElement 
-    || document.documentElement 
-    || document.body.parentNode 
-    || document.body
-  )
+ 
   const frame = target === document.body 
     && document.documentElement 
     ? document.documentElement 
@@ -49,7 +60,6 @@ function smoothScroll (speed, smooth) {
       return -event.deltaY / 50
     }
   }
-
   
   const update = () => {
     if (reseted) {
@@ -96,8 +106,16 @@ function smoothScroll (speed, smooth) {
 function systemControl () {
   const scrollSpeed = 140;
   const scrollSmoth = 16;
-  const smooth = smoothScroll(scrollSpeed, scrollSmoth)
-  const animation = animationControll();
+  const animationMargin = 40;
+   
+  const target = (document.scrollingElement 
+    || document.documentElement 
+    || document.body.parentNode 
+    || document.body
+  )
+
+  const smooth = smoothScroll(target, scrollSpeed, scrollSmoth)
+  const animation = animationControll(target, animationMargin);
 
   const move = (event) => {
     event.preventDefault();
@@ -154,6 +172,7 @@ function systemControl () {
     window.addEventListener('mousedown', commum )
     window.addEventListener("keydown", onKeyDown );
     navigationScroll();
+    animation.animate();
   }
 
   return { startEvents }

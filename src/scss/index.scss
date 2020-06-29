@@ -2,26 +2,37 @@
 @import 'variables';
 @import 'default';
 
+body {
+  background: #000;
+}
+
 section {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  transition: opacity .5s;
+  &.active {
+    opacity: .7;
+  }
 }
 
+#section01 {
+  background: #FD5B78;
+  a {
+    color: #000;
+  }
+}
 #section02 {
   background: #F5D253;
 }
 #section03 {
   background: #99F8CB;
 }
-#section03 {
+#section04 {
   background: #FD5B78;
 }
-#section04 {
-  background: #6CCDFC;
-}
-#section04 {
+#section05 {
   background: #FF98AA;
 }
