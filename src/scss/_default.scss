@@ -27,6 +27,10 @@ body {
   background: $background-color;
 }
 
+.navigate {
+  cursor: pointer;
+}
+
 ul {
   &:not(.browser-default) {
     padding-left: 0;

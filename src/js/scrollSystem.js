@@ -1,6 +1,30 @@
+function animationFrame () {
+  const timeoutFuncion = (func) => {
+    window.setTimeout(func, 1000 / 50);
+  }
+  return (
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    timeoutFuncion
+  );
+}
+
+function animationControll () {
+  const animate = () => {
+    console.log('animate')
+  }
+  return {
+    animate
+  }
+}
+
 function smoothScroll (speed, smooth) {
   let moving = false;
   let reseted = false;
+  const requestFrame = animationFrame();
   
   const target = (document.scrollingElement 
     || document.documentElement 
@@ -20,37 +44,19 @@ function smoothScroll (speed, smooth) {
 				return event.wheelDelta / event.detail / 40 * (event.detail > 0 ? 1 : -1 ) // Opera
 			else
 				return -event.detail / 3 // Firefox
-		} else
-			return event.wheelDelta / 120 // IE,Safari,Chrome
-  }
-
-  const animationFrame = () => {
-    const timeoutFuncion = (func) => {
-      window.setTimeout(func, 1000 / 50);
+		} else { // IE,Safari,Chrome
+      if (event.wheelDelta) return event.wheelDelta / 120;
+      return -event.deltaY / 50
     }
-    return (
-			window.requestAnimationFrame ||
-			window.webkitRequestAnimationFrame ||
-			window.mozRequestAnimationFrame ||
-			window.oRequestAnimationFrame ||
-      window.msRequestAnimationFrame ||
-      timeoutFuncion
-		);
   }
 
-  const requestFrame = (func) => { // requestAnimationFrame cross browser
-    const functionFrame = animationFrame();
-    functionFrame(func);
-	}
   
   const update = () => {
-    
     if (reseted) {
       moving = false;
-      console.log('reseted');
       return;
     }
-
+    
     moving = true
 		const delta = (position - target.scrollTop) / smooth
     target.scrollTop += delta
@@ -61,66 +67,100 @@ function smoothScroll (speed, smooth) {
 			moving = false
   }
 
+  const reset = () => {
+    reseted = true;
+  }
+
   const scrolled = (event) => {
+    if (reseted) {
+      position = target.scrollTop;
+      reseted = false;
+    }
     const delta = normalizeWheelDelta(event);
     position += -delta * speed;
     position = Math.max(0, Math.min(position, target.scrollHeight - frame.clientHeight))
-    reseted = false;
     if ( !moving ) update()
   }
 
-  const reset = () => {
-    console.log('reset');
-    reseted = true;
-    position = target.scrollTop;
-  }
+  const isMoving = () => {
+    return moving;
+  } 
 
   return {
     scroll: scrolled,
-    reset
+    reset,
+    isMoving
   }
 }
 
 function systemControl () {
-  const smooth = smoothScroll(140, 16)
-  const wheel = (event) => {
+  const scrollSpeed = 140;
+  const scrollSmoth = 16;
+  const smooth = smoothScroll(scrollSpeed, scrollSmoth)
+  const animation = animationControll();
+
+  const move = (event) => {
     event.preventDefault();
     smooth.scroll(event);
   }
-  const stop = () => {
-    smooth.reset();
-  }
-  return {
-    stop,
-    wheel
-  }
-}
 
-function eventObserver () {
-  console.log('eventObserver');
-  const scrollSystem = systemControl();
-  // window.onwheel = wheel;
-  window.addEventListener('wheel', scrollSystem.wheel, {
-    passive: false
-  });
-  window.addEventListener('mousewheel', scrollSystem.wheel, { 
-    passive: false 
-  })
-	window.addEventListener('DOMMouseScroll', scrollSystem.wheel, { 
-    passive: false 
-  })
-
-  const onKeyPress = (event) => {
-    const code = event.keyCode;
-    if (code === 38 || code === 40) {
-      scrollSystem.stop();
+  const commum = (event) => {
+    animation.animate();
+    if (event.type === 'mousedown') {
+      if((event.clientX + 7) >= event.target.clientWidth) {
+        event.preventDefault();
+        event.stopPropagation();
+        smooth.reset();
+      };
+      return;
+    }
+    if (smooth.isMoving()) {
+      event.stopPropagation();
+      event.preventDefault();
+    } else {
+      smooth.reset();
     }
   }
 
-  window.addEventListener("keydown", onKeyPress);
+  const onKeyDown = (event) => {
+    const code = event.keyCode;
+    if (code === 38 || code === 40) {
+      smooth.reset();
+    }
+  }
+
+  const navigationScroll = () => {
+    const links = document.querySelectorAll('.navigate');
+    links.forEach(link => {
+      console.log(link);
+      const itemId = link.dataset.href;
+      const item = document.getElementById(itemId);
+      if (item) {
+        link.addEventListener('click', () => {
+          smooth.reset();
+          item.scrollIntoView({ 
+            behavior: 'smooth' 
+          });
+        })
+      }
+    })
+  }
+
+  const startEvents = () => {
+    window.addEventListener('wheel', move, {
+      passive: false
+    });
+    window.addEventListener('scroll', commum )
+    window.addEventListener('mousedown', commum )
+    window.addEventListener("keydown", onKeyDown );
+    navigationScroll();
+  }
+
+  return { startEvents }
 }
 
+const scrollSystem = systemControl();
+
 document.addEventListener("DOMContentLoaded", function () {
-  console.log('DOMContentLoaded');
-  eventObserver();
+  scrollSystem.startEvents();
 });

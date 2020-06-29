@@ -1,1 +1,4 @@
-"use strict";document.addEventListener("DOMContentLoaded",function(){console.log("olar")});
+"use strict";
+
+document.addEventListener("DOMContentLoaded", function () {// console.log('olar');
+});
