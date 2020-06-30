@@ -1,0 +1,139 @@
+@import 'variables';
+@import './components/hamburgers/hamburgers.scss';
+
+@include keyframes('menuApper') {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@include keyframes('menuDisappear') {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+header {
+  position: fixed;
+  z-index: 1;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  .menu-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    #header-hamburguer {
+      cursor: pointer;
+      pointer-events: all;
+      position: absolute;
+      top: 80px;
+      right: 80px;
+      height: 48px;
+      width: 48px;
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      #hamburguer-text {
+        position: absolute;
+        right: 40px;
+        font-weight: 800;
+        font-family: 'Grota Rounded', sans-serif;
+        color: #fff;
+        transform: translateY(-3px);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity .5s ease;
+        line-height: 16px;
+      }
+    }
+    .menu-background {
+      position: absolute;
+      top: 104px;
+      right: 104px;
+      transform: translate(50%, -50%);
+      height: 48px;
+      width: 48px;
+      z-index: 40;
+      background: $primary-color;
+      border-radius: 5000px;
+      transition: height .5s ease-out, width .5s ease-out;
+    }
+  }
+  #menu-navigation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    z-index: 80;
+    opacity: 0;
+    &.disappear {
+      animation-name: menuDisappear;
+      animation-duration: .3s;
+    }
+    h3 {
+      font-size: 40px;
+      color: #F5D253;
+      font-weight: 800;
+      font-family: 'Grota Rounded', sans-serif;
+      margin: 0;
+    }
+    ul {
+      margin-top: 0;
+      pointer-events: none;
+      transition: margin .5s;
+      li {
+        margin-bottom: 16px;
+        color: #fff;
+        font-weight: 800;
+        font-family: 'Grota Rounded', sans-serif;
+        font-size: 24px;
+        cursor: pointer;
+        transition: color .3s;
+        &:hover {
+          color: $secondary-color;
+        }
+      }
+    }
+  }
+  &.active { 
+    .menu-container {
+      #header-hamburguer {
+        #hamburguer-text {
+          opacity: 1;
+          pointer-events: all;
+        }
+      }
+      .menu-background {
+        height: 200vw;
+        width: 200vw;
+      }
+    }
+    #menu-navigation {
+      opacity: 1;
+      animation-duration: .7s;
+      animation-name: menuApper;
+      ul {
+        margin-top: 60px;
+        pointer-events: all;
+      }
+    }
+  }
+}

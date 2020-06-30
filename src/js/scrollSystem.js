@@ -150,7 +150,6 @@ function systemControl () {
   const navigationScroll = () => {
     const links = document.querySelectorAll('.navigate');
     links.forEach(link => {
-      console.log(link);
       const itemId = link.dataset.href;
       const item = document.getElementById(itemId);
       if (item) {

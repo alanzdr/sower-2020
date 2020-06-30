@@ -137,7 +137,6 @@ function systemControl() {
   var navigationScroll = function navigationScroll() {
     var links = document.querySelectorAll('.navigate');
     links.forEach(function (link) {
-      console.log(link);
       var itemId = link.dataset.href;
       var item = document.getElementById(itemId);
 

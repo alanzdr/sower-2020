@@ -1,8 +1,7 @@
 
 @import 'variables';
 @import 'default';
-
-
+@import 'header';
 
 section {
   width: 100%;
@@ -16,9 +15,16 @@ section {
   }
 }
 
+
 #content-hero {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
   .logo {
-    width: 16%;
+    width: 18%;
   }
   .lines {
     position: absolute;

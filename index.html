@@ -7,21 +7,62 @@
     <link rel="stylesheet" href="assets/css/index.css" />
   </head>
   <body>
-    <header></header>
-
+    <header>
+      <div class="menu-container">
+        <button
+          id="header-hamburguer"
+          class="hamburger hamburger--collapse"
+          type="button"
+        >
+          <span id="hamburguer-text">fechar</span>
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+        <div class="menu-background"></div>
+      </div>
+      <nav id="menu-navigation">
+        <h3>MENU</h3>
+        <ul>
+          <li class="navigate" data-href="content-recipe">
+            SOBRE Nós
+          </li>
+          <li class="navigate" data-href="content-recipe">
+            ServIÇos
+          </li>
+          <li class="navigate" data-href="content-recipe">
+            PROPosTa & DIFeRENcIaL
+          </li>
+          <li class="navigate" data-href="content-recipe">
+            PoRTFóLIO
+          </li>
+          <li class="navigate" data-href="content-recipe">
+            CAses de SUCEsso
+          </li>
+          <li class="navigate" data-href="content-recipe">
+            AssINaTuRAs
+          </li>
+          <li class="navigate" data-href="content-recipe">
+            ConTATO
+          </li>
+        </ul>
+      </nav>
+    </header>
     <section id="content-hero">
       <object
         class="lines"
         data="./assets/img/animation/animation-lines.svg"
         type="image/svg+xml"
-        alt="Linhas atrás da logo"
-      ></object>
+      >
+        Linhas animadas atrás da logo
+      </object>
       <object
         class="logo"
         data="./assets/img/animation/main-logo.svg"
         type="image/svg+xml"
-        alt="Logo da sower animado"
-      ></object>
+      >
+        Logo da sower animado
+      </object>
       <a class="scroll navigate" data-href="content-recipe">
         <img src="./assets/img/icons/scroll-down.svg" alt="Rola Para baixo" />
       </a>
