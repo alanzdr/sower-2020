@@ -34,9 +34,7 @@ button {
 
 body {
   background: $background-color;
-  &.disabled {
-    overflow: hidden;
-  }
+  overflow-x: hidden;
 }
 
 .navigate {

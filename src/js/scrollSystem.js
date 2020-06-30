@@ -14,26 +14,56 @@ function animationFrame () {
 
 function animationControll (target, margin) {
   const items = document.querySelectorAll('.animated');
+  const animations = [];
+
+  const readAnimation = (item) => {
+    return animations.find((value) => value.item === item)
+  }
+
+  const addAnimation = (item, cb) => {
+    const animation = {
+      item,
+      animate: cb
+    }
+    animations.push(animation);
+  }
 
   const animate = () => {
     const position = target.scrollTop;
-    const animationPoint = position + (window.innerHeight / 2); 
+    const animationFocus = position + (window.innerHeight / 2) - 80; 
+    const animationVisible = position + window.innerHeight - margin; 
     items.forEach(item => {
       const top = item.offsetTop;
-      const distance = top - (animationPoint + margin);
+      const visible = top <= animationVisible;
+      const distance = top - animationFocus;
+      const focus = top <= animationFocus;
+      
       item.dataset.distance = distance;
-      if (top <= (animationPoint + margin)) {
-        item.dataset.active = true;
-        item.classList.add('active');
+      item.dataset.visible = visible;
+      item.dataset.focus = focus;
+
+      if (focus) {
+        item.classList.add('focus');
+        item.classList.add('visible');
+      } else 
+      if (visible) {
+        item.classList.remove('focus');
+        item.classList.add('visible');
       } else {
-        item.dataset.active = false;
-        item.classList.remove('active');
+        item.classList.remove('visible');
+        item.classList.remove('focus');
+      }
+
+      const animation = readAnimation(item);
+      if (animation) {
+        animation.animate(visible, focus, distance)
       }
     })
   }
 
   return {
-    animate
+    animate,
+    add: addAnimation
   }
 }
 
@@ -106,7 +136,7 @@ function smoothScroll (target, speed, smooth) {
 function systemControl () {
   const scrollSpeed = 140;
   const scrollSmoth = 16;
-  const animationMargin = 40;
+  const animationMargin = window.innerHeight / 5;
    
   const target = (document.scrollingElement 
     || document.documentElement 
@@ -170,15 +200,26 @@ function systemControl () {
     window.addEventListener('scroll', commum )
     window.addEventListener('mousedown', commum )
     window.addEventListener("keydown", onKeyDown );
+  }
+
+  const init = () => {
+    startEvents();
     navigationScroll();
     animation.animate();
   }
 
-  return { startEvents }
+  const animate = (item, cb) => {
+    animation.add(item, cb)
+  }
+
+  return { 
+    init,
+    animate
+  }
 }
 
 const scrollSystem = systemControl();
 
 document.addEventListener("DOMContentLoaded", function () {
-  scrollSystem.startEvents();
+  scrollSystem.init();
 });

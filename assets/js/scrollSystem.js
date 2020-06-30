@@ -10,27 +10,57 @@ function animationFrame() {
 
 function animationControll(target, margin) {
   var items = document.querySelectorAll('.animated');
+  var animations = [];
+
+  var readAnimation = function readAnimation(item) {
+    return animations.find(function (value) {
+      return value.item === item;
+    });
+  };
+
+  var addAnimation = function addAnimation(item, cb) {
+    var animation = {
+      item: item,
+      animate: cb
+    };
+    animations.push(animation);
+  };
 
   var animate = function animate() {
     var position = target.scrollTop;
-    var animationPoint = position + window.innerHeight / 2;
+    var animationFocus = position + window.innerHeight / 2 - 80;
+    var animationVisible = position + window.innerHeight - margin;
     items.forEach(function (item) {
       var top = item.offsetTop;
-      var distance = top - (animationPoint + margin);
+      var visible = top <= animationVisible;
+      var distance = top - animationFocus;
+      var focus = top <= animationFocus;
       item.dataset.distance = distance;
+      item.dataset.visible = visible;
+      item.dataset.focus = focus;
 
-      if (top <= animationPoint + margin) {
-        item.dataset.active = true;
-        item.classList.add('active');
+      if (focus) {
+        item.classList.add('focus');
+        item.classList.add('visible');
+      } else if (visible) {
+        item.classList.remove('focus');
+        item.classList.add('visible');
       } else {
-        item.dataset.active = false;
-        item.classList.remove('active');
+        item.classList.remove('visible');
+        item.classList.remove('focus');
+      }
+
+      var animation = readAnimation(item);
+
+      if (animation) {
+        animation.animate(visible, focus, distance);
       }
     });
   };
 
   return {
-    animate: animate
+    animate: animate,
+    add: addAnimation
   };
 }
 
@@ -94,7 +124,7 @@ function smoothScroll(target, speed, smooth) {
 function systemControl() {
   var scrollSpeed = 140;
   var scrollSmoth = 16;
-  var animationMargin = 40;
+  var animationMargin = window.innerHeight / 5;
   var target = document.scrollingElement || document.documentElement || document.body.parentNode || document.body;
   var smooth = smoothScroll(target, scrollSpeed, scrollSmoth);
   var animation = animationControll(target, animationMargin);
@@ -158,16 +188,25 @@ function systemControl() {
     window.addEventListener('scroll', commum);
     window.addEventListener('mousedown', commum);
     window.addEventListener("keydown", onKeyDown);
+  };
+
+  var init = function init() {
+    startEvents();
     navigationScroll();
     animation.animate();
   };
 
+  var animate = function animate(item, cb) {
+    animation.add(item, cb);
+  };
+
   return {
-    startEvents: startEvents
+    init: init,
+    animate: animate
   };
 }
 
 var scrollSystem = systemControl();
 document.addEventListener("DOMContentLoaded", function () {
-  scrollSystem.startEvents();
+  scrollSystem.init();
 });

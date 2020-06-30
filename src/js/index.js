@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   handleWithMenu();
+  console.log(scrollSystem);
 });
 
 function handleWithMenu () {

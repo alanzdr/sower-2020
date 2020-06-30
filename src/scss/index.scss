@@ -2,19 +2,7 @@
 @import 'variables';
 @import 'default';
 @import 'header';
-
-section {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  transition: opacity .5s;
-  &.active {
-    opacity: .7;
-  }
-}
-
+@import 'recipes';
 
 #content-hero {
   width: 100%;
@@ -49,12 +37,22 @@ section {
     }
   }
 }
-#section02 {
-  background: #F5D253;
+
+#section02,
+#section03,
+#section04,
+#section05 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: opacity .5s;
+  &.active {
+    opacity: .7;
+  }
 }
-#section03 {
-  background: #99F8CB;
-}
+
 #section04 {
   background: #FD5B78;
 }
