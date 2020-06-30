@@ -125,8 +125,8 @@ function smoothScroll(target, speed, smooth) {
 }
 
 function systemControl() {
-  var scrollSpeed = 120;
-  var scrollSmoth = 18;
+  var scrollSpeed = 100;
+  var scrollSmoth = 20;
   var animationMargin = window.innerHeight / 5;
   var target = document.scrollingElement || document.documentElement || document.body.parentNode || document.body;
   var smooth = smoothScroll(target, scrollSpeed, scrollSmoth);

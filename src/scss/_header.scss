@@ -5,7 +5,7 @@
   0% {
     opacity: 0;
   }
-  25% {
+  33% {
     opacity: 0;
   }
   100% {
@@ -86,7 +86,7 @@ header {
     opacity: 0;
     &.disappear {
       animation-name: menuDisappear;
-      animation-duration: .25s;
+      animation-duration: .2s;
     }
     h3 {
       font-size: 40px;
