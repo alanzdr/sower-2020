@@ -9,10 +9,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   .logo {
     width: 18%;
+    overflow: hidden;
+    pointer-events: none;
   }
   .lines {
     position: absolute;
@@ -20,6 +22,8 @@
     height: 100%;
     left: 0;
     top: 0;
+    overflow: hidden;
+    pointer-events: none;
   }
   .scroll {
     width: 24px;

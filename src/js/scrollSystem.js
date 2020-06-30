@@ -98,13 +98,17 @@ function smoothScroll (target, speed, smooth) {
     }
     
     moving = true
-		const delta = (position - target.scrollTop) / smooth
+    const delta = (position - target.scrollTop) / smooth   
+
+    console.log(delta);
     target.scrollTop += delta
     
-		if (Math.abs(delta) > 0.5)
+		if (Math.abs(delta) > 1)
 			requestFrame(update)
-		else
+		else {
 			moving = false
+      // target.scrollTop = position
+    }
   }
 
   const reset = () => {
@@ -119,6 +123,7 @@ function smoothScroll (target, speed, smooth) {
     const delta = normalizeWheelDelta(event);
     position += -delta * speed;
     position = Math.max(0, Math.min(position, target.scrollHeight - frame.clientHeight))
+
     if ( !moving ) update()
   }
 
@@ -134,8 +139,8 @@ function smoothScroll (target, speed, smooth) {
 }
 
 function systemControl () {
-  const scrollSpeed = 140;
-  const scrollSmoth = 16;
+  const scrollSpeed = 120;
+  const scrollSmoth = 18;
   const animationMargin = window.innerHeight / 5;
    
   const target = (document.scrollingElement 
@@ -148,6 +153,7 @@ function systemControl () {
   const animation = animationControll(target, animationMargin);
 
   const move = (event) => {
+    // console.log('move');
     event.preventDefault();
     smooth.scroll(event);
   }
@@ -155,25 +161,44 @@ function systemControl () {
   const commum = (event) => {
     animation.animate();
     if (event.type === 'mousedown') {
-      if((event.clientX + 7) >= event.target.clientWidth) {
-        event.preventDefault();
-        event.stopPropagation();
+      if (event.button === 0) {
+        if((event.clientX + 7) >= event.target.clientWidth) {
+          smooth.reset();
+        };
+      } else if (event.button === 1) {
         smooth.reset();
-      };
+      }
       return;
     }
+    // console.log(event);
+    event.preventDefault();
     if (smooth.isMoving()) {
-      event.stopPropagation();
       event.preventDefault();
+      return false;
     } else {
       smooth.reset();
     }
   }
 
   const onKeyDown = (event) => {
+    // left: 37, up: 38, right: 39, down: 40,
+    // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+    console.log(event)
+    const keys = {
+      37: true, 
+      38: true, 
+      39: true, 
+      40: true,
+      32: true,
+      33: true,
+      34: true,
+      35: true,
+      36: true,
+    };
     const code = event.keyCode;
-    if (code === 38 || code === 40) {
+    if (keys[code]) {
       smooth.reset();
+      return false;
     }
   }
 
@@ -197,9 +222,16 @@ function systemControl () {
     window.addEventListener('wheel', move, {
       passive: false
     });
-    window.addEventListener('scroll', commum )
+    window.addEventListener('mousewheel', move, { 
+      passive: false 
+    })
+    window.addEventListener('DOMMouseScroll', commum, false)
+    window.addEventListener('touchmove', commum, {
+      passive: false
+    });
+    window.addEventListener('scroll', commum, false)
     window.addEventListener('mousedown', commum )
-    window.addEventListener("keydown", onKeyDown );
+    window.addEventListener("keydown", onKeyDown, false );
   }
 
   const init = () => {
