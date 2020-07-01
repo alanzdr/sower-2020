@@ -7,6 +7,10 @@ $primary-color-dark: darken($primary-color, 15%) !default;
 $secondary-color: #1976d2 !default;
 $secondary-color-light: lighten($secondary-color, 15%) !default;
 $secondary-color-dark: darken($secondary-color, 15%) !default;
+// Yellow
+$yellow-color: #F5D253 !default;
+$yellow-color-light: lighten($yellow-color, 15%) !default;
+$yellow-color-dark: darken($yellow-color, 15%) !default;
 //
 $success-color: #4caf50 !default;
 $error-color: #f44336 !default;

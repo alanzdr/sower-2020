@@ -33,11 +33,14 @@ function animationControll (target, margin) {
     const animationFocus = position + (window.innerHeight / 2) - 80; 
     const animationVisible = position + window.innerHeight - margin; 
     items.forEach(item => {
-      const top = item.offsetTop;
+      const parentTop = item.offsetParent.offsetTop || 0;
+      const top = item.offsetTop + parentTop;
+      
       const visible = top <= animationVisible;
       const distance = top - animationFocus;
       const focus = top <= animationFocus;
       
+      item.dataset.top = top;
       item.dataset.distance = distance;
       item.dataset.visible = visible;
       item.dataset.focus = focus;
@@ -45,8 +48,7 @@ function animationControll (target, margin) {
       if (focus) {
         item.classList.add('focus');
         item.classList.add('visible');
-      } else 
-      if (visible) {
+      } else if (visible) {
         item.classList.remove('focus');
         item.classList.add('visible');
       } else {
@@ -83,10 +85,12 @@ function smoothScroll (target, speed, smooth) {
 		if (event.detail) {
 			if (event.wheelDelta)
 				return event.wheelDelta / event.detail / 40 * (event.detail > 0 ? 1 : -1 ) // Opera
-			else
+			else 
 				return -event.detail / 3 // Firefox
-		} else { // IE,Safari,Chrome
+    } else { // IE,Safari,Chrome
       if (event.wheelDelta) return event.wheelDelta / 120;
+      else if (event.deltaY >= -3 && event.deltaY <= 3) 
+        return -event.deltaY / 3
       return -event.deltaY / 50
     }
   }
@@ -100,14 +104,12 @@ function smoothScroll (target, speed, smooth) {
     moving = true
     const delta = (position - target.scrollTop) / smooth   
 
-    console.log(delta);
     target.scrollTop += delta
     
 		if (Math.abs(delta) > 1)
 			requestFrame(update)
 		else {
 			moving = false
-      // target.scrollTop = position
     }
   }
 
@@ -121,6 +123,7 @@ function smoothScroll (target, speed, smooth) {
       reseted = false;
     }
     const delta = normalizeWheelDelta(event);
+    console.log(delta);
     position += -delta * speed;
     position = Math.max(0, Math.min(position, target.scrollHeight - frame.clientHeight))
 
@@ -183,7 +186,6 @@ function systemControl () {
   const onKeyDown = (event) => {
     // left: 37, up: 38, right: 39, down: 40,
     // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-    console.log(event)
     const keys = {
       37: true, 
       38: true, 
