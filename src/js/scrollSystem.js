@@ -32,9 +32,11 @@ function animationControll (target, margin) {
     const position = target.scrollTop;
     const animationFocus = position + (window.innerHeight / 2) - 80; 
     const animationVisible = position + window.innerHeight - margin; 
+
+    
     items.forEach(item => {
-      const parentTop = item.offsetParent.offsetTop || 0;
-      const top = item.offsetTop + parentTop;
+      const top = position + item.getBoundingClientRect().top;
+      console.log(top, position)
       
       const visible = top <= animationVisible;
       const distance = top - animationFocus;
@@ -123,7 +125,6 @@ function smoothScroll (target, speed, smooth) {
       reseted = false;
     }
     const delta = normalizeWheelDelta(event);
-    console.log(delta);
     position += -delta * speed;
     position = Math.max(0, Math.min(position, target.scrollHeight - frame.clientHeight))
 
@@ -144,7 +145,7 @@ function smoothScroll (target, speed, smooth) {
 function systemControl () {
   const scrollSpeed = 100;
   const scrollSmoth = 20;
-  const animationMargin = window.innerHeight / 5;
+  const animationMargin = window.innerHeight / 4;
    
   const target = (document.scrollingElement 
     || document.documentElement 
@@ -228,9 +229,6 @@ function systemControl () {
       passive: false 
     })
     window.addEventListener('DOMMouseScroll', commum, false)
-    window.addEventListener('touchmove', commum, {
-      passive: false
-    });
     window.addEventListener('scroll', commum, false)
     window.addEventListener('mousedown', commum )
     window.addEventListener("keydown", onKeyDown, false );

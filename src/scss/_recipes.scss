@@ -33,22 +33,23 @@
           transition: opacity .7s, transform 1.5s, color .5s;
           &.text01 {
             transform: translateX(-7px);
+            transition-delay: .6s;
           }
           &.text02 {
             transform: translateX(63px);
-            transition-delay: .2s;
+            transition-delay: .4s;
           }
           &.text03 {
             color: #F5D253;
             font-size: 48px;
-            transition-delay: .4s;
             transform: translateX(8px);
+            transition-delay: .2s;
           }
           &.text04 {
             font-size: 24px;
             line-height: 32px;
-            transition-delay: .6s;
             transform: translateX(-32px);
+            transition-delay: 0s;
           }
         }
       }
@@ -70,24 +71,20 @@
           }
           &.text02 {
             transform: translateX(98px);
-            transition-delay: .2s;
           }
           &.text03 {
             color: #FD5B78;
             font-size: 40px;
-            transition-delay: .4s;
             transform: translateX(81px);
           }
           &.text04 {
             font-size: 24px;
             line-height: 32px;
-            transition-delay: .6s;
             transform: translateX(17px);
           }
           &.text05 {
             color: #FD5B78;
             font-size: 40px;
-            transition-delay: .8s;
             transform: translateX(-20px);
           }
         }
@@ -122,19 +119,43 @@
             opacity: 1;
             &.text01 {
               transform: translateX(25px);
+              transition-delay: 0s;
             }
             &.text02 {
               transform: translateX(95px);
+              transition-delay: .2s;
             }
             &.text03 {
               transform: translateX(40px);
+              transition-delay: .4s;
             }
             &.text04 {
               transform: translateX(0px);
+              transition-delay: .6s;
+            }
+          }
+        }
+        .bottom {
+          p {
+            &.text01 {
+              transition-delay: .8s;
+            }
+            &.text02 {
+              transition-delay: .6s;
+            }
+            &.text03 {
+              transition-delay: .4s;
+            }
+            &.text04 {
+              transition-delay: .2s;
+            }
+            &.text05 {
+              transition-delay: 0s;
             }
           }
         }
       }
+      
     }
     &.focus {
       .text {
@@ -157,18 +178,23 @@
             opacity: 1;
             &.text01 {
               transform: translateX(0px);
+              transition-delay: 0s;
             }
             &.text02 {
               transform: translateX(130px);
+              transition-delay: .2s;
             }
             &.text03 {
               transform: translateX(113px);
+              transition-delay: .4s;
             }
             &.text04 {
               transform: translateX(49px);
+              transition-delay: .6s;
             }
             &.text05 {
               transform: translateX(12px);
+              transition-delay: .8s;
             }
           }
         }
@@ -254,7 +280,7 @@
     width: 144%;
     left: 50%;
     transform: translateX(-50%);
-    top: -50%;
+    top: -20%;
     z-index: 1;
     pointer-events: none;
   }

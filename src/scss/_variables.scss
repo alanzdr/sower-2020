@@ -2,7 +2,7 @@
 // primary
 $primary-color: #FD5B78 !default;
 $primary-color-light: lighten($primary-color, 15%) !default;
-$primary-color-dark: darken($primary-color, 15%) !default;
+$primary-color-dark: darken($primary-color, 10%) !default;
 // secondary
 $secondary-color: #1976d2 !default;
 $secondary-color-light: lighten($secondary-color, 15%) !default;
