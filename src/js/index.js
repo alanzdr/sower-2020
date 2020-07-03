@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function handleWithMenu () {
   let active = false;
 
-  const body = document.querySelector('body')
+  // const body = document.querySelector('body')
   const header = document.querySelector('header')
   const hamburger = document.getElementById('header-hamburguer');
   const menuNavigator = document.querySelector('#menu-navigation');

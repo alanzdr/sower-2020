@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function handleWithMenu() {
-  var active = false;
-  var body = document.querySelector('body');
+  var active = false; // const body = document.querySelector('body')
+
   var header = document.querySelector('header');
   var hamburger = document.getElementById('header-hamburguer');
   var menuNavigator = document.querySelector('#menu-navigation');

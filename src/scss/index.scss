@@ -206,17 +206,40 @@
         margin-top: 8px;
         margin-bottom: 24px;
         color: #99F8CB;
+        opacity: 0;
+        transition: opacity .8s ease-in;
+        transition-delay: .3s;
       }
       p {
         text-align: center;
         color: #6CCDFC;
         line-height: 1.5;
-        &.down {
+        opacity: 0;
+        transition: opacity .8s ease-in;
+        &.text-down {
           width: 424px;
+          transition-delay: .0s;
+        }
+        &.text-up {
+          transition-delay: .6s;
+          
         }
       }
       .btn {
         margin-top: 24px;
+      }
+      &.visible {
+        p.text-up {
+          opacity: 1;
+          transition-delay: 0s;
+        }
+        h2 {
+          opacity: 1;
+        }
+        p.text-down {
+          opacity: 1;
+          transition-delay: .6s;
+        }
       }
     }
     .our-team {
@@ -271,6 +294,8 @@
           p {
             margin: 0;
             font-weight: bold;
+            opacity: 0;
+            transition: opacity .5s ease-in;
             &.name {
               color: #fff;
               font-size: 24px;
@@ -287,6 +312,44 @@
           img {
             width: 100px;
             border-radius: 50px;
+            transform: scale(0);
+            transform-origin: center bottom;
+            transition: transform .5s ease-in;
+          }
+          &.member01 {
+            p {
+              &.head {
+                color: #6CCDFC;
+              }
+            }
+          }
+          &.member02 {
+            p {
+              &.head {
+                color: #99F8CB;
+              }
+            }
+          }
+          &.member03 {
+            p {
+              &.head {
+                color: #F5D253;
+              }
+            }
+          }
+          &.member04 {
+            p {
+              &.head {
+                color: #99F8CB;
+              }
+            }
+          }
+          &.member05 {
+            p {
+              &.head {
+                color: #6CCDFC;
+              }
+            }
           }
         }
       }
@@ -309,6 +372,41 @@
             &.text04 {
               transform: translateX(67px);
               transition-delay: .6s;
+            }
+          }
+        }
+        .members {
+          .member {
+            p {
+              opacity: 1;
+            }
+            img {
+              transform: scale(1);
+            }
+            &.member01 {
+              img, p {
+                transition-delay: 0s;
+              }
+            }
+            &.member02 {
+              img, p {
+                transition-delay: .2s;
+              }
+            }
+            &.member03 {
+              img, p {
+                transition-delay: .4s;
+              }
+            }
+            &.member04 {
+              img, p {
+                transition-delay: .6s;
+              }
+            }
+            &.member05 {
+              img, p {
+                transition-delay: .8s;
+              }
             }
           }
         }

@@ -145,7 +145,7 @@ function smoothScroll (target, speed, smooth) {
 function systemControl () {
   const scrollSpeed = 100;
   const scrollSmoth = 20;
-  const animationMargin = window.innerHeight / 4;
+  const animationMargin = window.innerHeight / 3;
    
   const target = (document.scrollingElement 
     || document.documentElement 
