@@ -36,7 +36,7 @@ function animationControll (target, margin) {
     
     items.forEach(item => {
       const top = position + item.getBoundingClientRect().top;
-      console.log(top, position)
+      // console.log(top, position)
       
       const visible = top <= animationVisible;
       const distance = top - animationFocus;

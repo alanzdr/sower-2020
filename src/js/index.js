@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   handleWithMenu();
-  console.log(scrollSystem);
+  handleWithForm();
+  handleWithInputsAnimations();
+  // console.log(scrollSystem);
 });
 
 function handleWithMenu () {
@@ -37,4 +39,40 @@ function handleWithMenu () {
     active = !active;
     handleWithOpenOrCloseMenu();
   })
+}
+
+function handleWithForm () {
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    return false;
+  })
+}
+
+function handleWithInputsAnimations () {
+  const inputs = document.querySelectorAll('.input-container');
+
+  const setupInput = (inputContainer) =>  {
+    const input = inputContainer.querySelector('input');
+    const addEvents = (input) => {
+      input.addEventListener('focus', (ev) => {
+        inputContainer.classList.add("focus");
+      })
+      input.addEventListener('focusout', (ev) => {
+        if (!input.value.length) {
+          inputContainer.classList.remove("focus");
+        }
+      })
+    }
+    if (!input) {
+      const textarea = inputContainer.querySelector('textarea');
+      if (textarea) {
+        addEvents(textarea);
+      }
+      return;
+    }
+    addEvents(input);
+  }
+
+  inputs.forEach(setupInput)
 }

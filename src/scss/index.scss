@@ -6,6 +6,8 @@
  *  3. RECIPES
  *  4. SERVICES
  *  5. INSTRODUCTION
+ *  6. CONTACT
+ *  7. FOOTER
  */
 
 
@@ -182,6 +184,271 @@
 
 @import "./introduction";
  
+/*
+ * 6. CONTACT
+ */
+#content-contact {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    margin: 0;
+    width: 80%;
+    max-width: 360px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 32px;
+  }
+  .sub-title {
+    font-size: 16px;
+    color: #6CCDFC;
+    margin: 0;
+    margin-top: 32px;
+    font-weight: 700;
+  }
+  #contact-form {
+    width: 90%;
+    margin-top: 16px;
+    max-width: 380px;
+    .input-container {
+      position: relative;
+      width: 100%;
+      height: 56px;
+      border-radius: 8px;
+      border: 2px solid #E84365;
+      margin-top: 16px;
+      .icon {
+        position: absolute;
+        top: 50%;
+        width: 24px;
+        height: 24px;
+        left: 14px;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+      label {
+        position: absolute;
+        top: 16px;
+        left: 48px;
+        color: #41538E;
+        font-family: 'Lato', sans-serif;
+        font-weight: 700;
+        z-index: 2;
+        pointer-events: none;
+        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      input, textarea {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: 0;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        font-size: 16px;
+        font-family: 'Lato', sans-serif;
+        font-weight: 700;
+        padding-left: 48px;
+        border-radius: 8px;
+        // overflow: hidden;
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover, 
+        &:-webkit-autofill:focus {
+          border: 0;
+          background-color: transparent !important;
+          -webkit-box-shadow: 0 0 0px 1000px $background-color inset;
+          box-shadow: 0 0 0px 1000px $background-color inset;
+          -webkit-text-fill-color: #fff !important;
+        }
+      }
+      &::after {
+        position: absolute;
+        top: -2px;
+        left: 64px;
+        background: $background-color;
+        width: 0px;
+        height: 2px;
+        content: ' ';
+        transform: translateX(-50%);
+        z-index: 1;
+        transition: width 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      &.focus {
+        label {
+          top: -2px;
+          transform: translateY(-50%);
+          font-size: 12px;
+          color: #FD5B78;
+        }
+        &.name {
+          &::after {
+            width: 44px;
+            left: 64px;
+          }
+        }
+        &.email {
+          &::after {
+            width: 42px;
+            left: 63px;
+          }
+        }
+        &.phone, &.company {
+          &::after {
+            width: 58px;
+            left: 71px;
+          }
+        }
+        &.message {
+          &::after {
+            width: 133px;
+            left: 109px;
+          }
+        }
+      }
+      &.message {
+        height: 140px;
+        .icon {
+          top: 16px;
+          transform: translateY(0);
+        }
+        textarea {
+          padding: 16px;
+          padding-left: 48px;
+          resize: none;
+          // padding-left: 48px;
+        }
+      }
+    }
+    .form-footer {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      .message {
+        width: 145px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .icon {
+          width: 24px;
+        }
+        p {
+          margin-left: 10px;
+          font-size: 10px;
+          color: #41538E;
+          line-height: 1.2;
+        }
+      }
+    }
+  }
+}
+
+/*
+ * 7. FOOTER
+ */
+
+footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background: #152148;
+  margin-top: 100px;
+  .logo {
+    flex: 1;
+    padding: 6px;
+    img {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+  .contact {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .mail {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 190px;
+      span {
+        margin-left: 8px;
+        color: #6A7AAF;
+        font-size: 16px;
+        transition: color .3s;
+      }
+      &:hover {
+        span {
+          color: $primary-color;
+        }
+      }
+    }
+    .whats {
+      margin-top: 8px;
+      background: #25D366;
+      .icon {
+        width: 20px;
+      }
+      &:hover {
+        background: darken(#25D366, 15%);
+      }
+    }
+  }
+  address {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+    .address-link {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      span {
+        color: #6A7AAF;
+        font-size: 16px;
+        line-height: 1.5;
+        margin-left: 12px;
+        transition: color .3s;
+      }
+      &:hover {
+        span {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+  .social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    a {
+      margin: 0 6px;
+      svg {
+        transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: none;
+        path {
+          fill: #6ccdfc;
+          transition: fill .3s, box-shadow .3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+      }
+      &:hover {
+        svg {
+          transform: translateY(-1px);
+          path {
+            box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+            fill: darken(#6ccdfc, 15%);
+          }
+        }
+      }
+    }
+  }
+}
+
 #section05 {
   width: 100%;
   display: flex;

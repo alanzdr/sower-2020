@@ -31,8 +31,8 @@ function animationControll(target, margin) {
     var animationFocus = position + window.innerHeight / 2 - 80;
     var animationVisible = position + window.innerHeight - margin;
     items.forEach(function (item) {
-      var top = position + item.getBoundingClientRect().top;
-      console.log(top, position);
+      var top = position + item.getBoundingClientRect().top; // console.log(top, position)
+
       var visible = top <= animationVisible;
       var distance = top - animationFocus;
       var focus = top <= animationFocus;
@@ -128,7 +128,7 @@ function smoothScroll(target, speed, smooth) {
 function systemControl() {
   var scrollSpeed = 100;
   var scrollSmoth = 20;
-  var animationMargin = window.innerHeight / 4;
+  var animationMargin = window.innerHeight / 3;
   var target = document.scrollingElement || document.documentElement || document.body.parentNode || document.body;
   var smooth = smoothScroll(target, scrollSpeed, scrollSmoth);
   var animation = animationControll(target, animationMargin);
