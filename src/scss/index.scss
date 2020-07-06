@@ -192,7 +192,7 @@
     position: relative;
     z-index: 3;
     width: 90%;
-    max-width: 1120px;
+    max-width: 1080px;
     margin: 0 auto;
     .growth {
       display: flex;
@@ -413,7 +413,7 @@
       }
     }
     .projects {
-      margin-top: 80px;
+      margin-top: 120px;
       h2 {
         width: 608px;
         margin: 0 auto;
@@ -441,18 +441,27 @@
           width: calc(33.3333% - 20px);
           border-radius: 16px;
           overflow: hidden;
+          box-shadow: 0;
+          transform: translate(0);
+          // transition: box-shadow .5s, transform .5s;
+          transition: transform .5s cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
           img {
             width: 100%;
           }
           h3 {
             position: absolute;
             bottom: 24px;
+            margin: 0;
             left: 24px;
             width: 70%;
             font-family: 'Lato', sans-serif;
             font-weight: 700;
             color: #F5D253;
             font-size: 24px;
+          }
+          &:hover {
+            box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+            transform: translateY(-3px);
           }
         }
       }
