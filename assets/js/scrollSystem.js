@@ -31,10 +31,9 @@ function animationControll(target, margin) {
     var animationFocus = position + window.innerHeight / 2 - 80;
     var animationVisible = position + window.innerHeight - margin;
     items.forEach(function (item) {
-      var top = position + item.getBoundingClientRect().top; // console.log(top, position)
-
-      var visible = top <= animationVisible;
+      var top = position + item.getBoundingClientRect().top;
       var distance = top - animationFocus;
+      var visible = top <= animationVisible;
       var focus = top <= animationFocus;
       item.dataset.top = top;
       item.dataset.distance = distance;
@@ -134,7 +133,6 @@ function systemControl() {
   var animation = animationControll(target, animationMargin);
 
   var move = function move(event) {
-    // console.log('move');
     event.preventDefault();
     smooth.scroll(event);
   };

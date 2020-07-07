@@ -1,10 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // MENU
   handleWithMenu();
+  // FORM CONTROL
   handleWithForm();
+  // INPUT ANIMATIONS
   handleWithInputsAnimations();
-  // console.log(scrollSystem);
+  // HANDS ANIMATION
+  handleWithHandsAnimation();
 });
 
+// MENU
 function handleWithMenu () {
   let active = false;
 
@@ -41,6 +46,7 @@ function handleWithMenu () {
   })
 }
 
+// FORM CONTROL
 function handleWithForm () {
   const form = document.getElementById('contact-form');
   form.addEventListener('submit', (event) => {
@@ -49,6 +55,7 @@ function handleWithForm () {
   })
 }
 
+// INPUT ANIMATIONS
 function handleWithInputsAnimations () {
   const inputs = document.querySelectorAll('.input-container');
 
@@ -75,4 +82,57 @@ function handleWithInputsAnimations () {
   }
 
   inputs.forEach(setupInput)
+}
+
+// HANDS ANIMATION
+function handleWithHandsAnimation() {
+  const container = document.getElementById('hands-container');
+
+  const leftHand = container.querySelector('.left');
+  const leftLowShadow = leftHand.querySelector('.low-shadow')
+  const leftHighShadow = leftHand.querySelector('.high-shadow')
+
+  const rightHand = container.querySelector('.right');
+  const rightLowShadow = rightHand.querySelector('.low-shadow')
+  const rightHighShadow = rightHand.querySelector('.high-shadow')
+
+  const getDistanceRate = (distance) => {
+    const rateMax = 500;
+    if (distance > rateMax) {
+      return 0;
+    }
+    if (distance <= 0) {
+      return 1;
+    }
+    return (distance / -rateMax) + 1;
+  }
+
+  const setHandTransform = (rate) => {
+    const percent = (1 - rate) * 100;
+    leftHand.style.transform = `translate(-${percent}%, -${percent}px)`
+    rightHand.style.transform = `translate(${percent}%, ${percent}px)`
+  }
+
+  const setLowShadow = (rate) => {
+    let opacity = (rate - 0.5) / 0.5;
+    if (opacity < 0) opacity = 0;
+    leftLowShadow.style.opacity = opacity;
+    rightLowShadow.style.opacity = opacity;
+  }
+
+  const setHighShadow = (rate) => {
+    let opacity = (rate - 0.75) / 0.5;
+    if (opacity < 0) opacity = 0;
+    leftHighShadow.style.opacity = opacity;
+    rightHighShadow.style.opacity = opacity;
+  }
+
+  scrollSystem.animate(container, (visible, focus, distance) => {
+    const rate = getDistanceRate(distance);
+    if (rate !== 0) {
+      setHandTransform(rate);
+      setLowShadow(rate);
+      setHighShadow(rate);
+    }
+  })
 }

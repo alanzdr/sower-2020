@@ -33,13 +33,11 @@ function animationControll (target, margin) {
     const animationFocus = position + (window.innerHeight / 2) - 80; 
     const animationVisible = position + window.innerHeight - margin; 
 
-    
     items.forEach(item => {
       const top = position + item.getBoundingClientRect().top;
-      // console.log(top, position)
       
-      const visible = top <= animationVisible;
       const distance = top - animationFocus;
+      const visible = top <= animationVisible;
       const focus = top <= animationFocus;
       
       item.dataset.top = top;
@@ -157,7 +155,6 @@ function systemControl () {
   const animation = animationControll(target, animationMargin);
 
   const move = (event) => {
-    // console.log('move');
     event.preventDefault();
     smooth.scroll(event);
   }

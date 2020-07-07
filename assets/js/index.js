@@ -1,10 +1,15 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
-  handleWithMenu();
-  handleWithForm();
-  handleWithInputsAnimations(); // console.log(scrollSystem);
-});
+  // MENU
+  handleWithMenu(); // FORM CONTROL
+
+  handleWithForm(); // INPUT ANIMATIONS
+
+  handleWithInputsAnimations(); // HANDS ANIMATION
+
+  handleWithHandsAnimation();
+}); // MENU
 
 function handleWithMenu() {
   var active = false; // const body = document.querySelector('body')
@@ -38,7 +43,8 @@ function handleWithMenu() {
     active = !active;
     handleWithOpenOrCloseMenu();
   });
-}
+} // FORM CONTROL
+
 
 function handleWithForm() {
   var form = document.getElementById('contact-form');
@@ -46,7 +52,8 @@ function handleWithForm() {
     event.preventDefault();
     return false;
   });
-}
+} // INPUT ANIMATIONS
+
 
 function handleWithInputsAnimations() {
   var inputs = document.querySelectorAll('.input-container');
@@ -79,4 +86,59 @@ function handleWithInputsAnimations() {
   };
 
   inputs.forEach(setupInput);
+} // HANDS ANIMATION
+
+
+function handleWithHandsAnimation() {
+  var container = document.getElementById('hands-container');
+  var leftHand = container.querySelector('.left');
+  var leftLowShadow = leftHand.querySelector('.low-shadow');
+  var leftHighShadow = leftHand.querySelector('.high-shadow');
+  var rightHand = container.querySelector('.right');
+  var rightLowShadow = rightHand.querySelector('.low-shadow');
+  var rightHighShadow = rightHand.querySelector('.high-shadow');
+
+  var getDistanceRate = function getDistanceRate(distance) {
+    var rateMax = 500;
+
+    if (distance > rateMax) {
+      return 0;
+    }
+
+    if (distance <= 0) {
+      return 1;
+    }
+
+    return distance / -rateMax + 1;
+  };
+
+  var setHandTransform = function setHandTransform(rate) {
+    var percent = (1 - rate) * 100;
+    leftHand.style.transform = "translate(-".concat(percent, "%, -").concat(percent, "px)");
+    rightHand.style.transform = "translate(".concat(percent, "%, ").concat(percent, "px)");
+  };
+
+  var setLowShadow = function setLowShadow(rate) {
+    var opacity = (rate - 0.5) / 0.5;
+    if (opacity < 0) opacity = 0;
+    leftLowShadow.style.opacity = opacity;
+    rightLowShadow.style.opacity = opacity;
+  };
+
+  var setHighShadow = function setHighShadow(rate) {
+    var opacity = (rate - 0.75) / 0.5;
+    if (opacity < 0) opacity = 0;
+    leftHighShadow.style.opacity = opacity;
+    rightHighShadow.style.opacity = opacity;
+  };
+
+  scrollSystem.animate(container, function (visible, focus, distance) {
+    var rate = getDistanceRate(distance);
+
+    if (rate !== 0) {
+      setHandTransform(rate);
+      setLowShadow(rate);
+      setHighShadow(rate);
+    }
+  });
 }
