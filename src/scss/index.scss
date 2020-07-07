@@ -373,7 +373,7 @@ footer {
       display: flex;
       flex-direction: row;
       align-items: center;
-      width: 190px;
+      width: 187px;
       span {
         margin-left: 8px;
         color: #6A7AAF;
@@ -446,17 +446,5 @@ footer {
         }
       }
     }
-  }
-}
-
-#section05 {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  transition: opacity .5s;
-  &.active {
-    opacity: .7;
   }
 }
