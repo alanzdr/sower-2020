@@ -12,7 +12,7 @@
     z-index: 2;
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 85%;
     max-width: 990px;
     margin: 0 auto;
     .text {
@@ -51,6 +51,11 @@
             transform: translateX(-32px);
             transition-delay: 0s;
           }
+          &.text04-mobile-01,
+          &.text04-mobile-02,
+          &.text04-mobile-03 {
+            display: none;
+          }
         }
       }
       .bottom {
@@ -68,6 +73,12 @@
           transition: opacity .7s, transform 1.5s, color .5s;
           &.text01 {
             transform: translateX(-32px);
+          }
+          &.text01-mobile-01,
+          &.text01-mobile-02,
+          &.text03-mobile-01,
+          &.text03-mobile-02 {
+            display: none;
           }
           &.text02 {
             transform: translateX(98px);
@@ -283,5 +294,128 @@
     top: -20%;
     z-index: 1;
     pointer-events: none;
+  } 
+  @media screen and (max-width: 1000px) {
+    flex-direction: column; 
+    .content {
+      position: relative;
+      .text {
+        width: 100%;
+        .top {
+          margin-left: 0;
+          p {
+            font-size: 16px;
+            opacity: 1;
+            line-height: 24px;
+            &.text01 {
+              transform: translateX(0px);
+            }
+            &.text02 {
+              transform: translateX(58px);
+              font-size: 24px;
+            }
+            &.text03 {
+              transform: translateX(0px);
+              font-size: 48px;
+              line-height: 1;
+              width: 226px;
+            }
+            &.text04 {
+              display: none;
+            }
+            &.text04-mobile-01 {
+              font-size: 24px;
+              margin-top: 8px;
+              display: block;
+            }
+            &.text04-mobile-02 {
+              display: block;
+              margin-top: 4px;
+              transform: translateX(22px);
+            }
+            &.text04-mobile-03 {
+              display: block;
+              transform: translateX(45px);
+            }
+          }
+        }
+        .bottom {
+          margin-left: 0;
+          margin-top: 88px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          p {
+            font-size: 16px;
+            opacity: 1;
+            line-height: 24px;
+            text-align: right;
+            &.text01 {
+              display: none;
+            }
+            &.text01-mobile-01 {
+              display: block;
+              transform: translateX(-50px);
+            }
+            &.text01-mobile-02 {
+              display: block;
+              transform: translateX(-40px);
+            }
+            &.text02 {
+              transform: translateX(-12px);
+            }
+            &.text03 {
+              display: none;
+            }
+            &.text03-mobile-01 {
+              display: block;
+              color: #FD5B78;
+              font-size: 32px;
+              line-height: 1;
+              transform: translateX(-12px);
+            }
+            &.text03-mobile-02 {
+              display: block;
+              color: #FD5B78;
+              font-size: 32px;
+              line-height: 1;
+              transform: translateX(-2px);
+            }
+            &.text04 {
+              font-size: 16px;
+              transform: translateX(0px);
+            }
+            &.text05 {
+              font-size: 24px;
+              transform: translateX(0px);
+            }
+          }
+        }
+      }
+      .image {
+        position: initial;
+        // width: 100%;
+        width: auto;
+        // height: 100%;
+        img {
+          position: absolute;
+          width: 135%;
+          &.first {
+            right: 24px;
+            top: -24px;
+            transform: translateX(50%);
+            opacity: 1;
+          }
+          &.secound {
+            right: auto;
+            top: auto;
+            left: -24px;
+            bottom: -24px;
+            transform: translateX(-50%) scaleX(-1);
+            transition: transform .5s;
+          }
+        }
+      }
+    }
   }
 }

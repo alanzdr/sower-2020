@@ -49,8 +49,28 @@ function handleWithMenu () {
 // FORM CONTROL
 function handleWithForm () {
   const form = document.getElementById('contact-form');
+  const button = form.querySelector('button')
+
+  const getFormData = () => {
+    const data = {};
+    const elements = form.elements;
+    for ( let x = 0; x < elements.length; x++ ) {
+      const input = elements[x];
+      if (input.type != 'submit') {
+        let key = "";
+        if (input.name)
+          key = input.name
+        data[key] = input.value;
+      }
+    }
+    return data;
+  }
+
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    button.setAttribute('disabled', true);
+    const data = getFormData();
+    console.log(data);
     return false;
   })
 }

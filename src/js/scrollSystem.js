@@ -96,6 +96,7 @@ function smoothScroll (target, speed, smooth) {
   }
   
   const update = () => {
+    
     if (reseted) {
       moving = false;
       return;
@@ -129,6 +130,13 @@ function smoothScroll (target, speed, smooth) {
     if ( !moving ) update()
   }
 
+  const scrollTo = (scrollTop) => {
+    console.log('scrollTo')
+    position = scrollTop - 80;
+    reseted = false;
+    if ( !moving ) update()
+  }
+
   const isMoving = () => {
     return moving;
   } 
@@ -136,7 +144,8 @@ function smoothScroll (target, speed, smooth) {
   return {
     scroll: scrolled,
     reset,
-    isMoving
+    isMoving,
+    scrollTo
   }
 }
 
@@ -209,10 +218,9 @@ function systemControl () {
       const item = document.getElementById(itemId);
       if (item) {
         link.addEventListener('click', () => {
-          smooth.reset();
-          item.scrollIntoView({ 
-            behavior: 'smooth' 
-          });
+          const position = target.scrollTop;
+          const top = position + item.getBoundingClientRect().top;
+          smooth.scrollTo(top)
         })
       }
     })
@@ -232,9 +240,12 @@ function systemControl () {
   }
 
   const init = () => {
-    startEvents();
-    navigationScroll();
-    animation.animate();
+    const width = window.innerWidth;
+    if (width > 1000) {
+      startEvents();
+      navigationScroll();
+      animation.animate();
+    }
   }
 
   const animate = (item, cb) => {

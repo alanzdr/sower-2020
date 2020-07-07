@@ -136,4 +136,33 @@ header {
       }
     }
   }
+  
+  @media screen and (max-width: 1000px) { 
+    .menu-container {
+      #header-hamburguer {
+        top: auto;
+        bottom: 48px;
+        right: 50%;
+        transform: translateX(50%);
+        #hamburguer-text {
+          display: none;
+        }
+      }
+      .menu-background {
+        position: absolute;
+        top: auto;
+        bottom: 72px;
+        right: 50%;
+        transform: translate(50%, 50%);
+      }
+    }
+    &.active { 
+      .menu-container {
+        .menu-background {
+          height: 200vh;
+          width: 200vh;
+        }
+      }
+    }
+  }
 }

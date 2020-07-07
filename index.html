@@ -23,6 +23,7 @@
           id="header-hamburguer"
           class="hamburger hamburger--collapse"
           type="button"
+          aria-label="Menu"
         >
           <span id="hamburguer-text">fechar</span>
           <span class="hamburger-box">
@@ -83,11 +84,18 @@
             <p class="text02">Está cHeio de</p>
             <p class="text03">FóRmuLAs PROnTas</p>
             <p class="text04">que PROmeTEm REvoLucionar o meRcado.</p>
+            <p class="text04-mobile-01">que PROmeTEm</p>
+            <p class="text04-mobile-02">REvoLucionar</p>
+            <p class="text04-mobile-03">o meRcado.</p>
           </div>
           <div class="bottom">
             <p class="text01">Mas QuaIs DeLAs você coNHEce</p>
+            <p class="text01-mobile-01">Mas QuaIs DeLAs</p>
+            <p class="text01-mobile-02">você coNHEce</p>
             <p class="text02">Que esTão a FIM DE</p>
             <p class="text03">conheceR a FuNDo</p>
+            <p class="text03-mobile-01">conheceR</p>
+            <p class="text03-mobile-02">a FuNDo</p>
             <p class="text04">os desafios do seu negócio</p>
             <p class="text05">e fazê-lo crescer?</p>
           </div>
@@ -177,38 +185,74 @@
       <div id="hands-container" class="animated">
         <div class="content">
           <div class="left">
-            <img
-              class="hand"
-              src="assets/img/animation/hands/leftHand.png"
-              alt="Mão Esquerda"
-            />
-            <img
-              class="low-shadow"
-              src="assets/img/animation/hands/leftHand-shadow-low.png"
-              alt="Sombra leve da mão esquerda"
-            />
-            <img
-              class="high-shadow"
-              src="assets/img/animation/hands/leftHand-shadow-high.png"
-              alt="Sombra alta da mão esquerda"
-            />
+            <picture>
+              <source
+                srcset="assets/img/animation/hands/leftHand.webp"
+                type="image/webp"
+              />
+              <img
+                class="hand"
+                src="assets/img/animation/hands/leftHand.png"
+                alt="Mão Esquerda"
+              />
+            </picture>
+            <picture>
+              <source
+                srcset="assets/img/animation/hands/leftHand-shadow-low.webp"
+                type="image/webp"
+              />
+              <img
+                class="low-shadow"
+                src="assets/img/animation/hands/leftHand-shadow-low.png"
+                alt="Sombra leve da mão esquerda"
+              />
+            </picture>
+            <picture>
+              <source
+                srcset="assets/img/animation/hands/leftHand-shadow-high.webp"
+                type="image/webp"
+              />
+              <img
+                class="high-shadow"
+                src="assets/img/animation/hands/leftHand-shadow-high.png"
+                alt="Sombra alta da mão esquerda"
+              />
+            </picture>
           </div>
           <div class="right">
-            <img
-              class="hand"
-              src="assets/img/animation/hands/rightHand.png"
-              alt="Mão Direita"
-            />
-            <img
-              class="low-shadow"
-              src="assets/img/animation/hands/rightHand-shadow-low.png"
-              alt="Sombra leve da mão direita"
-            />
-            <img
-              class="high-shadow"
-              src="assets/img/animation/hands/rightHand-shadow-high.png"
-              alt="Sombra alta da mão direita"
-            />
+            <picture>
+              <source
+                srcset="assets/img/animation/hands/rightHand.webp"
+                type="image/webp"
+              />
+              <img
+                class="hand"
+                src="assets/img/animation/hands/rightHand.png"
+                alt="Mão Direita"
+              />
+            </picture>
+            <picture>
+              <source
+                srcset="assets/img/animation/hands/rightHand-shadow-low.webp"
+                type="image/webp"
+              />
+              <img
+                class="low-shadow"
+                src="assets/img/animation/hands/rightHand-shadow-low.png"
+                alt="Sombra leve da mão direita"
+              />
+            </picture>
+            <picture>
+              <source
+                srcset="assets/img/animation/hands/rightHand-shadow-high.webp"
+                type="image/webp"
+              />
+              <img
+                class="high-shadow"
+                src="assets/img/animation/hands/rightHand-shadow-high.png"
+                alt="Sombra alta da mão direita"
+              />
+            </picture>
           </div>
         </div>
       </div>
@@ -225,7 +269,7 @@
             Por isso entregamos projetos customizáveis para cada cliente, com
             soluções reais para desafios reais.
           </p>
-          <button class="btn">
+          <button class="btn navigate" data-href="introduction-projects">
             <img
               class="icon left"
               src="./assets/img/icons/star.svg"
@@ -465,6 +509,7 @@
             <span>
               ENVIaR MensaGem
             </span>
+            <span class="spinner"></span>
             <img
               class="icon right"
               src="./assets/img/icons/form-send.svg"

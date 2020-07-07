@@ -48,8 +48,30 @@ function handleWithMenu() {
 
 function handleWithForm() {
   var form = document.getElementById('contact-form');
+  var button = form.querySelector('button');
+
+  var getFormData = function getFormData() {
+    var data = {};
+    var elements = form.elements;
+
+    for (var x = 0; x < elements.length; x++) {
+      var input = elements[x];
+
+      if (input.type != 'submit') {
+        var key = "";
+        if (input.name) key = input.name;
+        data[key] = input.value;
+      }
+    }
+
+    return data;
+  };
+
   form.addEventListener('submit', function (event) {
     event.preventDefault();
+    button.setAttribute('disabled', true);
+    var data = getFormData();
+    console.log(data);
     return false;
   });
 } // INPUT ANIMATIONS

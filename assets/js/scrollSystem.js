@@ -113,6 +113,13 @@ function smoothScroll(target, speed, smooth) {
     if (!moving) update();
   };
 
+  var scrollTo = function scrollTo(scrollTop) {
+    console.log('scrollTo');
+    position = scrollTop - 80;
+    reseted = false;
+    if (!moving) update();
+  };
+
   var isMoving = function isMoving() {
     return moving;
   };
@@ -120,7 +127,8 @@ function smoothScroll(target, speed, smooth) {
   return {
     scroll: scrolled,
     reset: reset,
-    isMoving: isMoving
+    isMoving: isMoving,
+    scrollTo: scrollTo
   };
 }
 
@@ -195,10 +203,9 @@ function systemControl() {
 
       if (item) {
         link.addEventListener('click', function () {
-          smooth.reset();
-          item.scrollIntoView({
-            behavior: 'smooth'
-          });
+          var position = target.scrollTop;
+          var top = position + item.getBoundingClientRect().top;
+          smooth.scrollTo(top);
         });
       }
     });
@@ -218,9 +225,13 @@ function systemControl() {
   };
 
   var init = function init() {
-    startEvents();
-    navigationScroll();
-    animation.animate();
+    var width = window.innerWidth;
+
+    if (width > 1000) {
+      startEvents();
+      navigationScroll();
+      animation.animate();
+    }
   };
 
   var animate = function animate(item, cb) {
