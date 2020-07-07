@@ -22,6 +22,8 @@
 
 html,
 body {
+  width: 100%;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
 }
@@ -35,7 +37,6 @@ button {
 
 body {
   background: $background-color;
-  overflow-x: hidden;
 }
 
 .navigate {

@@ -97,10 +97,10 @@ function handleWithHandsAnimation() {
   var rightHand = container.querySelector('.right');
   var rightLowShadow = rightHand.querySelector('.low-shadow');
   var rightHighShadow = rightHand.querySelector('.high-shadow');
+  var rateMax = window.innerHeight;
+  console.log(rateMax); // const animationMargin = window.innerHeight / 3;
 
   var getDistanceRate = function getDistanceRate(distance) {
-    var rateMax = 500;
-
     if (distance > rateMax) {
       return 0;
     }
