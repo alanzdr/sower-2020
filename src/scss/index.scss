@@ -659,7 +659,7 @@ footer {
   @media screen and (max-width: 1000px) { 
     flex-direction: column;  
     margin-top: 60px;
-    padding-top: 32px;
+    padding-top: 40px;
     padding-bottom: 140px;
     .logo {
       display: none;
@@ -680,7 +680,6 @@ footer {
     .social {
       a {
         padding: 4px;
-        // margin: 0 10px;
       }
     }
   }

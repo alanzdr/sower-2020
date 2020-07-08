@@ -121,6 +121,9 @@ p {
     }
   }
   span {
+    display: flex;
+    align-items: center;
+    transform: translateY(-3px);
     font-weight: 800;
     line-height: 1;
     height: 24px;
