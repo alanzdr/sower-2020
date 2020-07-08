@@ -113,6 +113,7 @@ p {
   }
   .icon {
     width: 24px;
+    height: 24px;
     &.left {
       margin-right: 8px;
     }
@@ -125,7 +126,7 @@ p {
     align-items: center;
     transform: translateY(-3px);
     font-weight: 800;
-    line-height: 1;
+    line-height: 24px;
     height: 24px;
     font-family: 'Grota Rounded', sans-serif;
   }
