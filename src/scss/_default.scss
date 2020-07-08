@@ -124,9 +124,17 @@ p {
   p {
     color: #fff;
     margin: 0;
-    // transform: translateY(-3px);
+    transform: translateY(-3px);
     font-weight: 800;
     line-height: 1;
     font-family: 'Grota Rounded', sans-serif;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .btn {
+    p {
+      transform: translateY(0px);
+    }
   }
 }
