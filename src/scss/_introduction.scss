@@ -12,7 +12,7 @@
   .container {
     position: relative;
     z-index: 3;
-    width: 90%;
+    width: 85%;
     max-width: 1080px;
     margin: 0 auto;
   }
@@ -35,12 +35,22 @@
   }
   .background {
     position: absolute;
-    width: 144%;
+    width: 220%;
     left: 50%;
-    transform: translateX(-50%);
-    top: -20%;
+    top: 50%;
+    transform: translate(-50%, -70%);
     z-index: 1;
     pointer-events: none;
+  }
+  @media screen and (max-width: 1000px) { 
+    padding-top: 120px;
+    padding-bottom: 60px;
+    .transition {
+      display: none;
+    }
+    .wave-effect {
+      display: none;
+    }
   }
 }
 
@@ -66,13 +76,13 @@
     line-height: 1.5;
     opacity: 0;
     transition: opacity .8s ease-in;
+    margin: 0 auto;
+    &.text-up {
+      transition-delay: .6s;
+    }
     &.text-down {
       width: 424px;
       transition-delay: .0s;
-    }
-    &.text-up {
-      transition-delay: .6s;
-      
     }
   }
   .btn {
@@ -89,6 +99,33 @@
     p.text-down {
       opacity: 1;
       transition-delay: .6s;
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    text-align: center;
+    width: 100%;
+    h2 {
+      opacity: 1;
+      width: 190px;
+      margin: 10px auto;
+      font-size: 24px;
+    }
+    p {
+      opacity: 1;
+      max-width: 100%;
+      &.text-up {
+        width: 274px;
+      }
+      &.text-down {
+        width: 300px;
+      }
+    }
+    .btn {
+      margin-top: 32px;
+      span {
+        height: 38px;
+        max-width: 139px;
+      }
     }
   }
 }
@@ -262,6 +299,54 @@
       }
     }
   }
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+    .titles {
+      margin-right: 0;
+      text-align: center;
+      p {
+        opacity: 1;
+        &.text01 {
+          font-size: 24px;
+          transform: translateX(0px);
+        }
+        &.text02 {
+          font-size: 32px;
+          transform: translateX(0px);
+        }
+        &.text03 {
+          font-size: 24px;
+          transform: translateX(0px);
+        }
+        &.text04 {
+          font-size: 24px;
+          transform: translateX(0px);
+        }
+      }
+    }
+    .members {
+      margin-top: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+      .member {
+        margin: 8px;
+        p {
+          opacity: 1;
+          &.name {
+            font-size: 16px;
+          }
+          &.head {
+            font-size: 10px;
+            margin-top: 4px;
+          }
+        }
+        img {
+          width: 80px;
+          transform: scale(1);
+        }
+      }
+    }
+  }
 }
 
 @include keyframes('projectsHover') {
@@ -371,6 +456,34 @@
       }
       &.item03 {
         transition-delay: .4s;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 1000px) {
+    margin-top: 72px;
+    width: 100%;
+    h2 {
+      width: 100%;
+      max-width: 260px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    .sub-title {
+      opacity: 1;
+    }
+    .items {
+      flex-direction: column;
+      .item {
+        width: 100%;
+        max-width: 354px;
+        margin: 0 auto;
+        margin-bottom: 16px;
+        opacity: 1;
+        transform: translateY(0px);
+        h3 {
+          width: 80%;
+        }
       }
     }
   }

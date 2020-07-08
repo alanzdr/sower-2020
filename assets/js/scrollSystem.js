@@ -9,6 +9,7 @@ function animationFrame() {
 }
 
 function animationControll(target, margin) {
+  var debug = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var items = document.querySelectorAll('.animated');
   var animations = [];
 
@@ -18,7 +19,7 @@ function animationControll(target, margin) {
     });
   };
 
-  var addAnimation = function addAnimation(item, cb) {
+  var onAddAnimation = function onAddAnimation(item, cb) {
     var animation = {
       item: item,
       animate: cb
@@ -26,7 +27,7 @@ function animationControll(target, margin) {
     animations.push(animation);
   };
 
-  var animate = function animate() {
+  var onAnimate = function onAnimate() {
     var position = target.scrollTop;
     var animationFocus = position + window.innerHeight / 2 - 80;
     var animationVisible = position + window.innerHeight - margin;
@@ -35,10 +36,13 @@ function animationControll(target, margin) {
       var distance = top - animationFocus;
       var visible = top <= animationVisible;
       var focus = top <= animationFocus;
-      item.dataset.top = top;
-      item.dataset.distance = distance;
-      item.dataset.visible = visible;
-      item.dataset.focus = focus;
+
+      if (debug) {
+        item.dataset.top = top;
+        item.dataset.distance = distance;
+        item.dataset.visible = visible;
+        item.dataset.focus = focus;
+      }
 
       if (focus) {
         item.classList.add('focus');
@@ -59,9 +63,25 @@ function animationControll(target, margin) {
     });
   };
 
+  var onFocusAll = function onFocusAll() {
+    items.forEach(function (item) {
+      item.classList.add('focus');
+      item.classList.add('visible');
+    });
+  };
+
+  var onRemoveFocusAll = function onRemoveFocusAll() {
+    items.forEach(function (item) {
+      item.classList.remove('focus');
+      item.classList.remove('visible');
+    });
+  };
+
   return {
-    animate: animate,
-    add: addAnimation
+    animate: onAnimate,
+    add: onAddAnimation,
+    focusAll: onFocusAll,
+    removeFocusAll: onRemoveFocusAll
   };
 }
 
@@ -174,8 +194,6 @@ function systemControl() {
   };
 
   var onKeyDown = function onKeyDown(event) {
-    // left: 37, up: 38, right: 39, down: 40,
-    // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
     var keys = {
       37: true,
       38: true,
@@ -225,12 +243,19 @@ function systemControl() {
   };
 
   var init = function init() {
-    var width = window.innerWidth;
-
-    if (width > 1000) {
+    // const width = ;
+    if (window.innerWidth > 1000) {
       startEvents();
       navigationScroll();
       animation.animate();
+    } else {
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 1000) {
+          animation.focusAll();
+        } else {
+          animation.removeFocusAll();
+        }
+      });
     }
   };
 
