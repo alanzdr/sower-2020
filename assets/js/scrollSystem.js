@@ -14,9 +14,13 @@ function animationControll(target, margin) {
   var animations = [];
 
   var readAnimation = function readAnimation(item) {
-    return animations.find(function (value) {
-      return value.item === item;
-    });
+    // let animation = undefined;
+    for (var i = 0; i < animations.length; i++) {
+      var value = animations[i];
+      if (value.item === item) return value;
+    }
+
+    return undefined;
   };
 
   var onAddAnimation = function onAddAnimation(item, cb) {
@@ -31,7 +35,9 @@ function animationControll(target, margin) {
     var position = target.scrollTop;
     var animationFocus = position + window.innerHeight / 2 - 80;
     var animationVisible = position + window.innerHeight - margin;
-    items.forEach(function (item) {
+
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
       var top = position + item.getBoundingClientRect().top;
       var distance = top - animationFocus;
       var visible = top <= animationVisible;
@@ -60,21 +66,23 @@ function animationControll(target, margin) {
       if (animation) {
         animation.animate(visible, focus, distance);
       }
-    });
+    }
   };
 
   var onFocusAll = function onFocusAll() {
-    items.forEach(function (item) {
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
       item.classList.add('focus');
       item.classList.add('visible');
-    });
+    }
   };
 
   var onRemoveFocusAll = function onRemoveFocusAll() {
-    items.forEach(function (item) {
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
       item.classList.remove('focus');
       item.classList.remove('visible');
-    });
+    }
   };
 
   return {
@@ -215,7 +223,9 @@ function systemControl() {
 
   var navigationScroll = function navigationScroll() {
     var links = document.querySelectorAll('.navigate');
-    links.forEach(function (link) {
+
+    var _loop = function _loop(i) {
+      var link = links[i];
       var itemId = link.dataset.href;
       var item = document.getElementById(itemId);
 
@@ -226,7 +236,11 @@ function systemControl() {
           smooth.scrollTo(top);
         });
       }
-    });
+    };
+
+    for (var i = 0; i < links.length; i++) {
+      _loop(i);
+    }
   };
 
   var startEvents = function startEvents() {

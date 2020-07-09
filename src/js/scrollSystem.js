@@ -17,7 +17,12 @@ function animationControll (target, margin, debug = false) {
   const animations = [];
 
   const readAnimation = (item) => {
-    return animations.find((value) => value.item === item)
+    // let animation = undefined;
+    for (let i = 0; i < animations.length; i++) {
+      const value = animations[i];
+      if (value.item === item) return value;
+    }
+    return undefined;
   }
 
   const onAddAnimation = (item, cb) => {
@@ -33,7 +38,9 @@ function animationControll (target, margin, debug = false) {
     const animationFocus = position + (window.innerHeight / 2) - 80; 
     const animationVisible = position + window.innerHeight - margin; 
 
-    items.forEach(item => {
+    
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
       const top = position + item.getBoundingClientRect().top;
       
       const distance = top - animationFocus;
@@ -62,21 +69,23 @@ function animationControll (target, margin, debug = false) {
       if (animation) {
         animation.animate(visible, focus, distance)
       }
-    })
+    }
   }
 
   const onFocusAll = () => {
-    items.forEach(item => {
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
       item.classList.add('focus');
       item.classList.add('visible');
-    });
+    }
   }
 
   const onRemoveFocusAll = () => {
-    items.forEach(item => {
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
       item.classList.remove('focus');
       item.classList.remove('visible');
-    });
+    }
   } 
 
   return {
@@ -229,7 +238,8 @@ function systemControl () {
 
   const navigationScroll = () => {
     const links = document.querySelectorAll('.navigate');
-    links.forEach(link => {
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i];
       const itemId = link.dataset.href;
       const item = document.getElementById(itemId);
       if (item) {
@@ -239,7 +249,8 @@ function systemControl () {
           smooth.scrollTo(top)
         })
       }
-    })
+
+    }
   }
 
   const startEvents = () => {

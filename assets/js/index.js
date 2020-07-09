@@ -1,5 +1,18 @@
 "use strict";
 
+function supportCalculate() {
+  if (!self.fetch) return false;
+  if (!Number.isInteger) return false;
+  return true;
+}
+
+var highSupport = supportCalculate();
+
+if (!highSupport) {
+  var body = document.querySelector('body');
+  body.classList.add('low-support');
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   // MENU
   handleWithMenu(); // FORM CONTROL
@@ -33,12 +46,14 @@ function handleWithMenu() {
     }
   };
 
-  menuItems.forEach(function (item) {
+  for (var i = 0; i < menuItems.length; i++) {
+    var item = menuItems[i];
     item.addEventListener('click', function () {
       active = false;
       handleWithOpenOrCloseMenu();
     });
-  });
+  }
+
   hamburger.addEventListener('click', function () {
     active = !active;
     handleWithOpenOrCloseMenu();
@@ -107,7 +122,9 @@ function handleWithInputsAnimations() {
     addEvents(input);
   };
 
-  inputs.forEach(setupInput);
+  for (var i = 0; i < inputs.length; i++) {
+    setupInput(inputs[i]);
+  }
 } // HANDS ANIMATION
 
 

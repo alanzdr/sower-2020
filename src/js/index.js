@@ -1,3 +1,17 @@
+
+function supportCalculate () {
+  if (!self.fetch) return false;
+  if (!Number.isInteger) return false;
+  return true;
+}
+
+let highSupport = supportCalculate();
+
+if (!highSupport) {
+  const body = document.querySelector('body');
+  body.classList.add('low-support');
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   // MENU
   handleWithMenu();
@@ -33,12 +47,13 @@ function handleWithMenu () {
     }
   }
 
-  menuItems.forEach(item => {
+  for (let i = 0; i < menuItems.length; i++) {
+    const item = menuItems[i]
     item.addEventListener('click', () => {
       active = false;
       handleWithOpenOrCloseMenu();
     });
-  })
+  }
 
   hamburger.addEventListener('click', () => {
     active = !active;
@@ -101,7 +116,9 @@ function handleWithInputsAnimations () {
     addEvents(input);
   }
 
-  inputs.forEach(setupInput)
+  for (let i = 0; i < inputs.length; i++) {
+    setupInput(inputs[i]);
+  }
 }
 
 // HANDS ANIMATION
