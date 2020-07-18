@@ -65,6 +65,7 @@ function handleWithMenu () {
 function handleWithForm () {
   const form = document.getElementById('contact-form');
   const button = form.querySelector('button')
+  const API_URL = 'http://localhost:3333/email';
 
   const getFormData = () => {
     const data = {};
@@ -81,11 +82,45 @@ function handleWithForm () {
     return data;
   }
 
+  const sendFromXML = (data) => {
+
+  }
+
+  const sendFromFetch = (data) => {
+    fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then((data) => {
+        if (data.error) {
+          alert('Erro Ao Enviar dados, tente novamente mais tarde')
+          console.log(data.error);
+        } else {
+          alert('Obrigado')
+        }
+        // console.log(button);
+        button.removeAttribute('disabled');
+      })
+      .catch(err => {
+        alert('Erro Ao Enviar dados, tente novamente mais tarde')
+        console.log(err);
+        button.removeAttribute('disabled');
+      })
+  }
+
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     button.setAttribute('disabled', true);
     const data = getFormData();
-    console.log(data);
+    if (highSupport) {
+      sendFromFetch(data)
+    } else {
+      sendFromXML(data)
+    }
     return false;
   })
 }
@@ -93,7 +128,6 @@ function handleWithForm () {
 // INPUT ANIMATIONS
 function handleWithInputsAnimations () {
   const inputs = document.querySelectorAll('.input-container');
-
   const setupInput = (inputContainer) =>  {
     const input = inputContainer.querySelector('input');
     const addEvents = (input) => {

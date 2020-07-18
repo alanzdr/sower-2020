@@ -64,6 +64,7 @@ function handleWithMenu() {
 function handleWithForm() {
   var form = document.getElementById('contact-form');
   var button = form.querySelector('button');
+  var API_URL = 'http://localhost:3333/email';
 
   var getFormData = function getFormData() {
     var data = {};
@@ -82,11 +83,44 @@ function handleWithForm() {
     return data;
   };
 
+  var sendFromXML = function sendFromXML(data) {};
+
+  var sendFromFetch = function sendFromFetch(data) {
+    fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then(function (data) {
+      if (data.error) {
+        alert('Erro Ao Enviar dados, tente novamente mais tarde');
+        console.log(data.error);
+      } else {
+        alert('Obrigado');
+      } // console.log(button);
+
+
+      button.removeAttribute('disabled');
+    }).catch(function (err) {
+      alert('Erro Ao Enviar dados, tente novamente mais tarde');
+      console.log(err);
+      button.removeAttribute('disabled');
+    });
+  };
+
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     button.setAttribute('disabled', true);
     var data = getFormData();
-    console.log(data);
+
+    if (highSupport) {
+      sendFromFetch(data);
+    } else {
+      sendFromXML(data);
+    }
+
     return false;
   });
 } // INPUT ANIMATIONS
