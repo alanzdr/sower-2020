@@ -25,9 +25,7 @@
   display: flex;
   position: relative;
   padding-top: 360px;
-  // padding-bottom: 60px;
   overflow: hidden;
-
   .container {
     position: relative;
     z-index: 3;
@@ -538,7 +536,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
   max-width: 680px;
   margin: 120px auto;
   margin-top: 170px;
@@ -595,6 +593,28 @@
     }
     .btn {
       margin-top: 32px;
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+    margin-top: 120px;
+    margin-bottom: 24px;
+    .box {
+      width: 100%;
+      max-width: 250px;
+      margin: 0 auto;
+    }
+    .right-content {
+      width: 100%;
+      margin: 0 auto;
+      margin-top: 32px;
+      text-align: center;
+      align-items: center;
+      .btn {
+        p {
+          font-size: 15px;
+        }
+      }
     }
   }
 }

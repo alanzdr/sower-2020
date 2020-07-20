@@ -65,7 +65,7 @@ function handleWithMenu () {
 function handleWithForm () {
   const form = document.getElementById('contact-form');
   const button = form.querySelector('button')
-  const API_URL = 'http://localhost:3333/email';
+  const API_URL = 'https://us-central1-sower-283917.cloudfunctions.net/sower-webmail-send';
 
   const getFormData = () => {
     const data = {};
@@ -82,45 +82,37 @@ function handleWithForm () {
     return data;
   }
 
-  const sendFromXML = (data) => {
-
-  }
-
-  const sendFromFetch = (data) => {
-    fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then((data) => {
-        if (data.error) {
-          alert('Erro Ao Enviar dados, tente novamente mais tarde')
-          console.log(data.error);
-        } else {
-          alert('Obrigado')
-        }
-        // console.log(button);
-        button.removeAttribute('disabled');
+  const fetchSend = (url, data, cb) => {
+    if (highSupport) {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
       })
-      .catch(err => {
-        alert('Erro Ao Enviar dados, tente novamente mais tarde')
-        console.log(err);
-        button.removeAttribute('disabled');
-      })
+        .then(cb)
+        .catch(err => {
+          console.log(err);
+        })
+    } else {
+      const req = new XMLHttpRequest();
+      req.open('POST', url, false);
+      req.setRequestHeader("Content-Type", "application/json");
+      req.onload = cb;
+      req.send(JSON.stringify(data));
+    }
   }
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     button.setAttribute('disabled', true);
     const data = getFormData();
-    if (highSupport) {
-      sendFromFetch(data)
-    } else {
-      sendFromXML(data)
-    }
+    fetchSend(API_URL, data, () => {
+      button.removeAttribute('disabled');
+      alert('Obrigado, Em breve o entraremos em contato com você')
+    })
     return false;
   })
 }

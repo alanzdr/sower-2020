@@ -64,7 +64,7 @@ function handleWithMenu() {
 function handleWithForm() {
   var form = document.getElementById('contact-form');
   var button = form.querySelector('button');
-  var API_URL = 'http://localhost:3333/email';
+  var API_URL = 'https://us-central1-sower-283917.cloudfunctions.net/sower-webmail-send';
 
   var getFormData = function getFormData() {
     var data = {};
@@ -83,44 +83,35 @@ function handleWithForm() {
     return data;
   };
 
-  var sendFromXML = function sendFromXML(data) {};
-
-  var sendFromFetch = function sendFromFetch(data) {
-    fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    }).then(function (data) {
-      if (data.error) {
-        alert('Erro Ao Enviar dados, tente novamente mais tarde');
-        console.log(data.error);
-      } else {
-        alert('Obrigado');
-      } // console.log(button);
-
-
-      button.removeAttribute('disabled');
-    }).catch(function (err) {
-      alert('Erro Ao Enviar dados, tente novamente mais tarde');
-      console.log(err);
-      button.removeAttribute('disabled');
-    });
+  var fetchSend = function fetchSend(url, data, cb) {
+    if (highSupport) {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(cb).catch(function (err) {
+        console.log(err);
+      });
+    } else {
+      var req = new XMLHttpRequest();
+      req.open('POST', url, false);
+      req.setRequestHeader("Content-Type", "application/json");
+      req.onload = cb;
+      req.send(JSON.stringify(data));
+    }
   };
 
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     button.setAttribute('disabled', true);
     var data = getFormData();
-
-    if (highSupport) {
-      sendFromFetch(data);
-    } else {
-      sendFromXML(data);
-    }
-
+    fetchSend(API_URL, data, function () {
+      button.removeAttribute('disabled');
+      alert('Obrigado, Em breve o entraremos em contato com você');
+    });
     return false;
   });
 } // INPUT ANIMATIONS
