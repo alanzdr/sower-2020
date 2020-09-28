@@ -253,8 +253,13 @@
       cursor: pointer;
       overflow: hidden;
       border-radius: 10px;
+      box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.1);
+      display: flex;
       .preview {
         width: 100%;
+        source {
+          display: none;
+        }
       }
       .play-button {
         position: absolute;
@@ -433,5 +438,43 @@
   }
   @media screen and (max-width: 600px) {
     padding-bottom: 0px;
+  }
+}
+
+#video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  transition: background .5s ease-out;
+  background: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  cursor: pointer;
+  .content {
+    transform-origin: center center;
+    transform: scale(.75);
+    opacity: 0;
+    transition: opacity .5s ease-out, transform .3s ease-out;
+    width: 90%;
+    height: 50.6vw;
+    max-width: 1000px;
+    max-height: 563px;
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &.open {
+    background: rgba(0, 0, 0, 0.8);
+    pointer-events: all;
+    .content {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }

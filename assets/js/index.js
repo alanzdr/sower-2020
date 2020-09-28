@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   handleWithInputsAnimations(); // HANDS ANIMATION
 
-  handleWithHandsAnimation();
+  handleWithHandsAnimation(); // VIDEO
+
+  handleWithVideoContainer();
 }); // MENU
 
 function handleWithMenu() {
@@ -205,4 +207,47 @@ function handleWithHandsAnimation() {
       setHighShadow(rate);
     }
   });
+} // VIDEO
+
+
+function handleWithVideoContainer() {
+  var container = document.getElementById("video-container");
+  var video = container.querySelector("iframe");
+  var play = document.getElementById("video-play");
+  var videoSrc = "https://www.youtube.com/embed/k4nF4sMOayE";
+  var undefinedParam = "https://10.0.0.0/";
+
+  var onSetSrc = function onSetSrc() {
+    setTimeout(function () {
+      if (!video.src || video.src === undefinedParam) {
+        video.src = videoSrc;
+      }
+    }, 1000);
+  };
+
+  var onSetup = function onSetup() {
+    play.addEventListener("click", onOpen);
+    container.addEventListener("click", function () {
+      onClose();
+    });
+    onSetSrc();
+  };
+
+  var onClose = function onClose() {
+    container.classList.remove("open");
+    document.body.style.overflow = "auto";
+    video.src = undefinedParam;
+    onSetSrc();
+  };
+
+  var onOpen = function onOpen() {
+    container.classList.add("open");
+    document.body.style.overflow = "hidden";
+
+    if (!video.src || video.src === undefinedParam) {
+      video.src = videoSrc;
+    }
+  };
+
+  onSetup();
 }

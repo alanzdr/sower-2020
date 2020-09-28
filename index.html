@@ -130,20 +130,13 @@
           </picture>
         </div>
       </div>
-      <div class="video-container">
+      <div id='video-play' class="video-container">
         <h2>Assista ao vídeo e conheça a Sower</h2>
         <div class="video">
-          <picture>
-            <source
-              srcset="./assets/img/animation/video-preview.webp"
-              type="image/webp"
-            />
-            <img
-              src="./assets/img/animation/video-preview.png"
-              alt="Preview"
-              class="preview"
-            />
-          </picture>
+          <video class="preview" autoplay loop muted>
+            <source src="./assets/video/video-thumb.webm" type="video/webm" />
+            Sua agência conhece a fundo os desafios do seu negócio?
+          </video>
           <div class="play-button">
             <img src="./assets/img/icons/play.svg" alt="Play" />
           </div>
@@ -731,6 +724,18 @@
         </a>
       </div>
     </footer>
+    <!-- VIDEO -->
+    <div id="video-container">
+      <div class="content">
+        <iframe
+          src="https://10.0.0.0/"
+          frameborder="0"
+          title="Sua agência conhece a fundo os desafios do seu negócio?"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
     <!-- SCRIPTS -->
     <script src="assets/js/scrollSystem.js?v=1.2"></script>
     <script src="assets/js/index.js?v=1.2"></script>
