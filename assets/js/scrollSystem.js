@@ -33,7 +33,7 @@ function animationControll(target, margin) {
 
   var onAnimate = function onAnimate() {
     var position = target.scrollTop;
-    var animationFocus = position + window.innerHeight / 2 - 80;
+    var animationFocus = position + window.innerHeight / 2 - 100;
     var animationVisible = position + window.innerHeight - margin;
 
     for (var i = 0; i < items.length; i++) {

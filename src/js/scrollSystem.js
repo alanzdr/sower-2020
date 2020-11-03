@@ -35,7 +35,7 @@ function animationControll (target, margin, debug = false) {
 
   const onAnimate = () => {
     const position = target.scrollTop;
-    const animationFocus = position + (window.innerHeight / 2) - 80; 
+    const animationFocus = position + (window.innerHeight / 2) - 100; 
     const animationVisible = position + window.innerHeight - margin; 
 
     

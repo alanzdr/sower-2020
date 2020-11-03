@@ -1,7 +1,7 @@
-@import 'variables';
-@import './components/hamburgers/hamburgers.scss';
+@import "variables";
+@import "./components/hamburgers/hamburgers.scss";
 
-@include keyframes('menuApper') {
+@include keyframes("menuApper") {
   0% {
     opacity: 0;
   }
@@ -13,7 +13,7 @@
   }
 }
 
-@include keyframes('menuDisappear') {
+@include keyframes("menuDisappear") {
   0% {
     opacity: 1;
   }
@@ -37,38 +37,38 @@ header {
       cursor: pointer;
       pointer-events: all;
       position: absolute;
-      top: 80px;
-      right: 80px;
-      height: 48px;
-      width: 48px;
+      top: 8rem;
+      right: 8rem;
+      height: 4.8rem;
+      width: 4.8rem;
       z-index: 50;
       display: flex;
       justify-content: center;
       align-items: center;
       #hamburguer-text {
         position: absolute;
-        right: 40px;
+        right: 4rem;
         font-weight: 800;
-        font-family: 'Grota Rounded', sans-serif;
+        font-family: "Grota Rounded", sans-serif;
         color: #fff;
         transform: translateY(-3px);
         pointer-events: none;
         opacity: 0;
-        transition: opacity .5s ease;
-        line-height: 16px;
+        transition: opacity 0.5s ease;
+        line-height: 1.6rem;
       }
     }
     .menu-background {
       position: absolute;
-      top: 104px;
-      right: 104px;
+      top: 10.4rem;
+      right: 10.4rem;
       transform: translate(50%, -50%);
-      height: 48px;
-      width: 48px;
+      height: 4.8rem;
+      width: 4.8rem;
       z-index: 40;
       background: $primary-color;
-      border-radius: 5000px;
-      transition: height .5s ease-out, width .5s ease-out;
+      border-radius: 500rem;
+      transition: height 0.5s ease-out, width 0.5s ease-out;
     }
   }
   #menu-navigation {
@@ -86,34 +86,34 @@ header {
     opacity: 0;
     &.disappear {
       animation-name: menuDisappear;
-      animation-duration: .2s;
+      animation-duration: 0.2s;
     }
     h3 {
-      font-size: 40px;
-      color: #F5D253;
+      font-size: 4rem;
+      color: $yellow-color;
       font-weight: 800;
-      font-family: 'Grota Rounded', sans-serif;
+      font-family: "Grota Rounded", sans-serif;
       margin: 0;
     }
     ul {
       margin-top: 0;
       pointer-events: none;
-      transition: margin .5s;
+      transition: margin 0.5s;
       li {
-        margin-bottom: 16px;
+        margin-bottom: 1.6rem;
         color: #fff;
         font-weight: 800;
-        font-family: 'Grota Rounded', sans-serif;
-        font-size: 24px;
+        font-family: "Grota Rounded", sans-serif;
+        font-size: 2.4rem;
         cursor: pointer;
-        transition: color .3s;
+        transition: color 0.3s;
         &:hover {
           color: $secondary-color;
         }
       }
     }
   }
-  &.active { 
+  &.active {
     .menu-container {
       #header-hamburguer {
         #hamburguer-text {
@@ -128,7 +128,7 @@ header {
     }
     #menu-navigation {
       opacity: 1;
-      animation-duration: .7s;
+      animation-duration: 0.7s;
       animation-name: menuApper;
       ul {
         margin-top: 60px;
@@ -136,12 +136,12 @@ header {
       }
     }
   }
-  
-  @media screen and (max-width: 1000px) { 
+
+  @media screen and (max-width: 1000px) {
     .menu-container {
       #header-hamburguer {
         top: auto;
-        bottom: 48px;
+        bottom: 4.8rem;
         right: 50%;
         transform: translateX(50%);
         #hamburguer-text {
@@ -151,12 +151,12 @@ header {
       .menu-background {
         position: absolute;
         top: auto;
-        bottom: 72px;
+        bottom: 7.2rem;
         right: 50%;
         transform: translate(50%, 50%);
       }
     }
-    &.active { 
+    &.active {
       .menu-container {
         .menu-background {
           height: 200vh;
