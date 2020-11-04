@@ -1,20 +1,40 @@
 "use strict";
 
+window.highSupport = false;
+
 function supportCalculate() {
-  if (!self.fetch) return false;
-  if (!Number.isInteger) return false;
-  return true;
+  window.highSupport = !self.fetch && !Number.isInteger;
+
+  if (window.highSupport) {
+    var body = document.querySelector('body');
+    body.classList.add('low-support');
+  }
 }
 
-var highSupport = supportCalculate();
-
-if (!highSupport) {
-  var body = document.querySelector('body');
-  body.classList.add('low-support');
+function useFetch(url, data, cb) {
+  if (window.highSupport) {
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then(cb).catch(function (err) {
+      console.log(err);
+    });
+  } else {
+    var req = new XMLHttpRequest();
+    req.open('POST', url, false);
+    req.setRequestHeader("Content-Type", "application/json");
+    req.onload = cb;
+    req.send(JSON.stringify(data));
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // MENU
+  supportCalculate(); // MENU
+
   handleWithMenu(); // FORM CONTROL
 
   handleWithForm(); // INPUT ANIMATIONS
@@ -83,27 +103,6 @@ function handleWithForm() {
     }
 
     return data;
-  };
-
-  var fetchSend = function fetchSend(url, data, cb) {
-    if (highSupport) {
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      }).then(cb).catch(function (err) {
-        console.log(err);
-      });
-    } else {
-      var req = new XMLHttpRequest();
-      req.open('POST', url, false);
-      req.setRequestHeader("Content-Type", "application/json");
-      req.onload = cb;
-      req.send(JSON.stringify(data));
-    }
   };
 
   form.addEventListener('submit', function (event) {

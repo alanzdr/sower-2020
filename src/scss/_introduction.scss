@@ -24,13 +24,13 @@
   width: 100%;
   display: flex;
   position: relative;
-  padding-top: 360px;
+  padding-top: 36rem;
   overflow: hidden;
   .container {
     position: relative;
     z-index: 3;
     width: 85%;
-    max-width: 1080px;
+    max-width: 108rem;
     margin: 0 auto;
   }
 
@@ -38,7 +38,7 @@
     position: absolute;
     z-index: 2;
     left: 0;
-    top: -1px;
+    top: -0.1rem;
     width: 100%;
     pointer-events: none;
   }
@@ -61,12 +61,12 @@
   }
   @media screen and (min-width: 1440px) {
     .transition {
-      top: -40px;
+      top: -4rem;
     }
   }
   @media screen and (max-width: 1000px) {
-    padding-top: 120px;
-    padding-bottom: 60px;
+    padding-top: 12rem;
+    padding-bottom: 6rem;
     .transition {
       display: none;
     }
@@ -86,10 +86,10 @@
   justify-content: center;
   h2 {
     margin: 0;
-    font-size: 40px;
+    font-size: 4rem;
     line-height: 1.2;
-    margin-top: 8px;
-    margin-bottom: 24px;
+    margin-top: 0.8rem;
+    margin-bottom: 2.4rem;
     color: #99f8cb;
     opacity: 0;
     transition: opacity 0.8s ease-in;
@@ -106,12 +106,12 @@
       transition-delay: 0.6s;
     }
     &.text-down {
-      width: 424px;
+      width: 42.4rem;
       transition-delay: 0s;
     }
   }
   .btn {
-    margin-top: 24px;
+    margin-top: 2.4rem;
   }
   &.visible {
     p.text-up {
@@ -131,25 +131,25 @@
     width: 100%;
     h2 {
       opacity: 1;
-      width: 190px;
-      margin: 10px auto;
-      font-size: 24px;
+      width: 19rem;
+      margin: 1rem auto;
+      font-size: 2.4rem;
     }
     .text {
       opacity: 1;
       max-width: 100%;
       &.text-up {
-        width: 274px;
+        width: 27.4rem;
       }
       &.text-down {
-        width: 300px;
+        width: 30rem;
       }
     }
     .btn {
-      margin-top: 32px;
-      height: 60px;
+      margin-top: 3.2rem;
+      height: 6rem;
       p {
-        max-width: 139px;
+        max-width: 13.9rem;
       }
     }
   }
@@ -176,31 +176,31 @@
     p {
       font-weight: 800;
       font-family: "Grota Rounded", sans-serif;
-      font-size: 40px;
-      margin: 4px 0;
+      font-size: 4rem;
+      margin: 0.4rem 0;
       color: #fd5b78;
       line-height: 1;
       position: relative;
       opacity: 0;
       transition: opacity 0.7s, transform 1.5s, color 0.5s;
       &.text01 {
-        font-size: 24px;
-        transform: translateX(-32px);
+        font-size: 2.4rem;
+        transform: translateX(-3.2rem);
         transition-delay: 0.6s;
       }
       &.text02 {
-        font-size: 32px;
-        transform: translateX(58px);
+        font-size: 3.2rem;
+        transform: translateX(5.8rem);
         transition-delay: 0.4s;
       }
       &.text03 {
         color: #99f8cb;
-        transform: translateX(-22px);
+        transform: translateX(-2.2rem);
         transition-delay: 0.2s;
       }
       &.text04 {
         color: #f5d253;
-        transform: translateX(35px);
+        transform: translateX(3.5rem);
         transition-delay: 0s;
       }
     }
@@ -303,19 +303,19 @@
       p {
         opacity: 1;
         &.text01 {
-          transform: translateX(0px);
+          transform: translateX(0);
           transition-delay: 0s;
         }
         &.text02 {
-          transform: translateX(90px);
+          transform: translateX(9rem);
           transition-delay: 0.2s;
         }
         &.text03 {
-          transform: translateX(10px);
+          transform: translateX(1rem);
           transition-delay: 0.4s;
         }
         &.text04 {
-          transform: translateX(67px);
+          transform: translateX(6.7rem);
           transition-delay: 0.6s;
         }
       }
@@ -396,6 +396,7 @@
   }
   @media screen and (max-width: 1000px) {
     margin-top: 8rem;
+    display: flex;
     flex-direction: column;
     .titles {
       margin-right: 0;
@@ -404,43 +405,44 @@
         opacity: 1;
         &.text01 {
           font-size: 2.4rem;
-          transform: translateX(0px);
+          transform: translateX(0);
         }
         &.text02 {
           font-size: 3.2rem;
-          transform: translateX(0px);
+          transform: translateX(0);
         }
         &.text03 {
           font-size: 2.4rem;
-          transform: translateX(0px);
+          transform: translateX(0);
         }
         &.text04 {
           font-size: 2.4rem;
-          transform: translateX(0px);
+          transform: translateX(0);
         }
       }
     }
     .members {
       margin-top: 3.2rem;
+      display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      grid-gap: 0;
       .member {
-        margin: 0;
+        margin: 0 0.8rem;
         margin-top: 1.6rem;
-        width: 33.3333%;
+        width: calc(25% - 1.6rem);
         p {
           opacity: 1;
           &.name {
-            font-size: 1.6rem;
             width: 100%;
           }
           &.head {
-            font-size: 1rem;
             margin-top: 0.4rem;
             width: 100%;
           }
         }
         img {
+          width: 6.7rem;
+          height: 6.7rem;
           transform: scale(1);
         }
       }
@@ -458,82 +460,116 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 680px;
-  margin: 120px auto;
-  margin-top: 170px;
+  max-width: 70rem;
+  margin: 12rem auto;
+  margin-top: 17rem;
   .box {
     position: relative;
     width: 40%;
-    max-width: 250px;
+    max-width: 25rem;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 16px;
-    padding-top: 56px;
-    .logo {
+    padding: 1.6rem;
+    overflow: hidden;
+    transform: translateX(-4rem);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    .cover {
       position: absolute;
+      left: 0;
       top: 0;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100px;
+      width: 100%;
+      height: 8.9rem;
+      object-fit: cover;
+    }
+    .logo {
+      position: relative;
+      width: 10rem;
+      height: 10rem;
       border-radius: 50%;
+      margin: 0 auto;
     }
     h3 {
-      margin: 0;
+      margin-top: 0.8rem;
       color: #1d2951;
-      font-size: 24px;
+      font-size: 2.4rem;
       line-height: 1.5;
     }
     .address {
       display: flex;
       flex-direction: row;
       align-items: center;
-      margin-top: 8px;
-      margin-bottom: 24px;
+      margin-top: 0.8rem;
+      margin-bottom: 2.4rem;
       p {
         margin: 0;
-        color: #fd5b78;
-        font-size: 12px;
-        margin-left: 8px;
+        color: $primary-color;
+        font-size: 1.2rem;
+        margin-left: 0.8rem;
         line-height: 1;
       }
     }
   }
   .right-content {
-    width: calc(100% - 298px);
+    width: calc(100% - 29.8rem);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    overflow: hidden;
+    transform: translateX(4rem);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
     .text {
       margin: 0;
-      font-size: 16px;
+      font-size: 1.6rem;
       line-height: 1.5;
       color: #6ccdfc;
     }
     .btn {
-      margin-top: 32px;
+      margin-top: 3.2rem;
+    }
+  }
+  &.visible {
+    .box {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .right-content {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
   @media screen and (max-width: 1000px) {
     flex-direction: column;
-    margin-top: 120px;
-    margin-bottom: 24px;
+    margin-top: 12rem;
+    margin-bottom: 2.4rem;
     .box {
       width: 100%;
-      max-width: 250px;
+      max-width: 25rem;
       margin: 0 auto;
+      opacity: 1;
+      transform: none;
     }
     .right-content {
       width: 100%;
       margin: 0 auto;
-      margin-top: 32px;
+      margin-top: 3.2rem;
       text-align: center;
       align-items: center;
+      opacity: 1;
+      transform: none;
+      .text {
+        margin: 0 auto;
+        display: flex;
+        max-width: 28rem;
+        width: 100%;
+      }
       .btn {
         p {
-          font-size: 15px;
+          font-size: 1.5rem;
         }
       }
     }

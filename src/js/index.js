@@ -1,18 +1,39 @@
+window.highSupport = false;
 
 function supportCalculate () {
-  if (!self.fetch) return false;
-  if (!Number.isInteger) return false;
-  return true;
+  window.highSupport = !self.fetch && !Number.isInteger
+  if (window.highSupport) {
+    const body = document.querySelector('body');
+    body.classList.add('low-support');
+  }
 }
 
-let highSupport = supportCalculate();
-
-if (!highSupport) {
-  const body = document.querySelector('body');
-  body.classList.add('low-support');
+function useFetch(url, data, cb) {
+  if (window.highSupport) {
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(cb)
+      .catch(err => {
+        console.log(err);
+      })
+  } else {
+    const req = new XMLHttpRequest();
+    req.open('POST', url, false);
+    req.setRequestHeader("Content-Type", "application/json");
+    req.onload = cb;
+    req.send(JSON.stringify(data));
+  }
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
+  supportCalculate();
   // MENU
   handleWithMenu();
   // FORM CONTROL
@@ -82,29 +103,6 @@ function handleWithForm () {
       }
     }
     return data;
-  }
-
-  const fetchSend = (url, data, cb) => {
-    if (highSupport) {
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-        .then(cb)
-        .catch(err => {
-          console.log(err);
-        })
-    } else {
-      const req = new XMLHttpRequest();
-      req.open('POST', url, false);
-      req.setRequestHeader("Content-Type", "application/json");
-      req.onload = cb;
-      req.send(JSON.stringify(data));
-    }
   }
 
   form.addEventListener('submit', (event) => {

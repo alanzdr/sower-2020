@@ -51,7 +51,7 @@ header {
         font-weight: 800;
         font-family: "Grota Rounded", sans-serif;
         color: #fff;
-        transform: translateY(-3px);
+        transform: translateY(-0.3rem);
         pointer-events: none;
         opacity: 0;
         transition: opacity 0.5s ease;
@@ -131,7 +131,7 @@ header {
       animation-duration: 0.7s;
       animation-name: menuApper;
       ul {
-        margin-top: 60px;
+        margin-top: 6rem;
         pointer-events: all;
       }
     }

@@ -1,4 +1,3 @@
-
 body.low-support {
   #content-hero {
     .logo-object {
@@ -9,6 +8,18 @@ body.low-support {
     }
     .lines {
       display: none;
+    }
+  }
+  #content-introduction {
+    #introduction-team {
+      display: flex;
+      .members {
+        display: flex;
+        margin-left: auto;
+        .member {
+          margin: 0 0.8rem;
+        }
+      }
     }
   }
 }
