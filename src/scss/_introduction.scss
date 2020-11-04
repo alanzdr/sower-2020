@@ -33,7 +33,6 @@
     max-width: 108rem;
     margin: 0 auto;
   }
-
   .transition {
     position: absolute;
     z-index: 2;
@@ -46,7 +45,7 @@
     position: absolute;
     z-index: 2;
     left: 0;
-    bottom: -1.6rem;
+    bottom: 10rem;
     width: 100%;
     pointer-events: none;
   }
@@ -59,9 +58,27 @@
     z-index: 1;
     pointer-events: none;
   }
+  @media screen and (min-width: 1200px) {
+    .wave-effect {
+      bottom: 4.8rem;
+    }
+  }
   @media screen and (min-width: 1440px) {
     .transition {
       top: -4rem;
+    }
+    .wave-effect {
+      bottom: 2rem;
+    }
+  }
+  @media screen and (min-width: 1600px) {
+    .wave-effect {
+      bottom: -2rem;
+    }
+  }
+  @media screen and (min-width: 1800px) {
+    .wave-effect {
+      bottom: -10rem;
     }
   }
   @media screen and (max-width: 1000px) {
@@ -71,7 +88,32 @@
       display: none;
     }
     .wave-effect {
-      display: none;
+      bottom: 40rem;
+    }
+  }
+  @media screen and (max-width: 900px) {
+    .wave-effect {
+      bottom: 45rem;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .wave-effect {
+      bottom: 50rem;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    .wave-effect {
+      bottom: 60rem;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .wave-effect {
+      bottom: 65rem;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .wave-effect {
+      bottom: 70rem;
     }
   }
 }
@@ -394,13 +436,20 @@
       }
     }
   }
-  @media screen and (max-width: 1000px) {
-    margin-top: 8rem;
+  @media screen and (max-width: 1200px) {
     display: flex;
     flex-direction: column;
     .titles {
       margin-right: 0;
       text-align: center;
+    }
+    .members {
+      margin-top: 4rem;
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    margin-top: 8rem;
+    .titles {
       p {
         opacity: 1;
         &.text01 {
