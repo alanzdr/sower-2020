@@ -142,7 +142,6 @@ function smoothScroll(target, speed, smooth) {
   };
 
   var scrollTo = function scrollTo(scrollTop) {
-    console.log('scrollTo');
     position = scrollTop - 80;
     reseted = false;
     if (!moving) update();
@@ -188,8 +187,7 @@ function systemControl() {
       }
 
       return;
-    } // console.log(event);
-
+    }
 
     event.preventDefault();
 
@@ -221,8 +219,29 @@ function systemControl() {
     }
   };
 
-  var navigationScroll = function navigationScroll() {
+  var navigationScroll = function navigationScroll(isMobile) {
     var links = document.querySelectorAll('.navigate');
+    var eventsCleanup = [];
+
+    var desktopMove = function desktopMove(item) {
+      var position = target.scrollTop;
+      var top = position + item.getBoundingClientRect().top;
+      smooth.scrollTo(top);
+    };
+
+    var mobileMove = function mobileMove(item) {
+      item.scrollIntoView({
+        behavior: "smooth"
+      });
+    };
+
+    var eventListener = function eventListener(item) {
+      if (isMobile) {
+        mobileMove(item);
+      } else {
+        desktopMove(item);
+      }
+    };
 
     var _loop = function _loop(i) {
       var link = links[i];
@@ -230,10 +249,13 @@ function systemControl() {
       var item = document.getElementById(itemId);
 
       if (item) {
-        link.addEventListener('click', function () {
-          var position = target.scrollTop;
-          var top = position + item.getBoundingClientRect().top;
-          smooth.scrollTo(top);
+        var onEventTricker = function onEventTricker() {
+          eventListener(item);
+        };
+
+        link.addEventListener('click', onEventTricker);
+        eventsCleanup.push(function () {
+          link.removeEventListener('click', onEventTricker);
         });
       }
     };
@@ -241,6 +263,18 @@ function systemControl() {
     for (var i = 0; i < links.length; i++) {
       _loop(i);
     }
+
+    var onCleanup = function onCleanup() {
+      for (var _i = 0; _i < eventsCleanup.length; _i++) {
+        var call = eventsCleanup[_i];
+
+        if (typeof call === 'function') {
+          call();
+        }
+      }
+    };
+
+    return onCleanup;
   };
 
   var startEvents = function startEvents() {
@@ -257,20 +291,29 @@ function systemControl() {
   };
 
   var init = function init() {
-    // const width = ;
-    if (window.innerWidth > 1000) {
-      startEvents();
-      navigationScroll();
-      animation.animate();
-    } else {
-      window.addEventListener("resize", function () {
-        if (window.innerWidth > 1000) {
-          animation.focusAll();
-        } else {
-          animation.removeFocusAll();
-        }
-      });
-    }
+    var setup = function setup(isMobile) {
+      if (!isMobile) {
+        startEvents();
+        animation.focusAll();
+        animation.animate();
+      } else {
+        animation.removeFocusAll();
+      }
+    };
+
+    var isMobile = window.innerWidth < 1000;
+    setup(isMobile);
+    var navigationCleanup = navigationScroll(isMobile);
+    console.log(navigationCleanup);
+    window.addEventListener("resize", function () {
+      var newIsMobile = window.innerWidth < 1000;
+
+      if (isMobile != newIsMobile) {
+        setup(newIsMobile);
+        navigationCleanup();
+        navigationCleanup = navigationScroll(newIsMobile);
+      }
+    });
   };
 
   var animate = function animate(item, cb) {

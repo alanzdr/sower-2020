@@ -26,7 +26,8 @@
   box-sizing: border-box;
 }
 
-body {
+body,
+html {
   width: 100%;
   overflow-x: hidden;
   background: $background-color;

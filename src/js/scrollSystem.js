@@ -38,7 +38,6 @@ function animationControll (target, margin, debug = false) {
     const animationFocus = position + (window.innerHeight / 2) - 100; 
     const animationVisible = position + window.innerHeight - margin; 
 
-    
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
       const top = position + item.getBoundingClientRect().top;
@@ -158,7 +157,6 @@ function smoothScroll (target, speed, smooth) {
   }
 
   const scrollTo = (scrollTop) => {
-    console.log('scrollTo')
     position = scrollTop - 80;
     reseted = false;
     if ( !moving ) update()
@@ -207,7 +205,6 @@ function systemControl () {
       }
       return;
     }
-    // console.log(event);
     event.preventDefault();
     if (smooth.isMoving()) {
       event.preventDefault();
@@ -236,21 +233,53 @@ function systemControl () {
     }
   }
 
-  const navigationScroll = () => {
+  const navigationScroll = (isMobile) => {
     const links = document.querySelectorAll('.navigate');
+    let eventsCleanup = [];
+
+    const desktopMove = (item) => {
+      const position = target.scrollTop;
+      const top = position + item.getBoundingClientRect().top;
+      smooth.scrollTo(top)
+    }
+
+    const mobileMove = (item) => {
+      item.scrollIntoView({behavior: "smooth"});
+    }
+
+    const eventListener = (item) => {
+      if (isMobile) {
+        mobileMove(item)
+      } else {
+        desktopMove(item)
+      }
+    }
+
     for (let i = 0; i < links.length; i++) {
       const link = links[i];
       const itemId = link.dataset.href;
       const item = document.getElementById(itemId);
       if (item) {
-        link.addEventListener('click', () => {
-          const position = target.scrollTop;
-          const top = position + item.getBoundingClientRect().top;
-          smooth.scrollTo(top)
+        const onEventTricker = () => {
+          eventListener(item)
+        }
+        link.addEventListener('click', onEventTricker)
+        eventsCleanup.push(() => {
+          link.removeEventListener('click', onEventTricker)
         })
       }
-
     }
+
+    const onCleanup = () => {
+      for (let i = 0; i < eventsCleanup.length; i++) {
+        const call = eventsCleanup[i];
+        if (typeof call === 'function') {
+          call();
+        }
+      }
+    }
+
+    return onCleanup
   }
 
   const startEvents = () => {
@@ -269,20 +298,30 @@ function systemControl () {
 
 
   const init = () => {
-    // const width = ;
-    if (window.innerWidth > 1000) {
-      startEvents();
-      navigationScroll();
-      animation.animate();
-    } else {
-      window.addEventListener("resize", () => {
-        if (window.innerWidth > 1000) {
-          animation.focusAll();
-        } else {
-          animation.removeFocusAll();
-        }
-      });
+    const setup = (isMobile) => {
+      if (!isMobile) {
+        startEvents();
+        animation.focusAll();
+        animation.animate();
+      } else {
+        animation.removeFocusAll();
+      }
     }
+
+    let isMobile = window.innerWidth < 1000;
+
+    setup(isMobile);
+    let navigationCleanup = navigationScroll(isMobile);
+    console.log(navigationCleanup)
+
+    window.addEventListener("resize", () => {
+      const newIsMobile = window.innerWidth < 1000;
+      if (isMobile != newIsMobile) {
+        setup(newIsMobile);
+        navigationCleanup()
+        navigationCleanup = navigationScroll(newIsMobile);
+      }
+    });
   }
 
   const animate = (item, cb) => {
